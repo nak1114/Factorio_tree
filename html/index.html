@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="css/jquery-ui.css" />
+		<script src="lib/jquery-1.12.2.js"></script>
+		<script src="lib/jquery-ui.js"></script>
+		<script src="lib/jquery.combobox.js"></script>
+		<script src="js/factorio.js"></script>
+		<script src="js/factorio-recipes.js"></script>
+		<script src="js/factorio-factories.js"></script>
+		<script src="js/factorio-helper.js"></script>
+		<title>Factorio Tree</title>
+		<style type="text/css">
+			.ui-autocomplete {
+				max-height: 100px;
+				overflow-y: auto;
+				overflow-x: hidden;
+				padding-right: 20px;
+			}
+			.custom-combobox-input {
+				width: 500px;
+			}
+			.custom-combobox-icon {
+				vertical-align: middle;
+				width: 32px;
+				height: 32px;
+			}
+		</style>
+		<script>
+			$(function() {
+				$("#product_counts").spinner({
+					min : 0,
+					icons : {
+						up : "ui-icon-plus",
+						down : "ui-icon-minus"
+					},
+				});
+				$("#combobox").html(Factorio.helper.target_options);
+				$("#combobox").combobox();
+			});
+			$(function() {
+				//				console.log(Factorio.helper.targets);
+				$('#add_product').button();
+				$('#add_product').click(function() {
+					var name,
+					    val;
+					val = $("#combobox").children(':selected')[0].value;
+					if (val === undefined || val == '') {
+						return;
+					}
+					//$('#debug').html('値:' + $("#product_counts").spinner('value') + '<br />name:'+Factorio.recipes[val].name);
+				});
+				//console.log($("#combobox").combobox());
+			});
+		</script>
+	</head>
+	<body>
+		<h1>Factorio Chartsheets</h1>
+		<div id='debug'></div>
+		<div class="ui-widget">
+			<label>target item: </label>
+			<select id="combobox">
+				<option value="">Select one...</option>
+			</select>
+			<input id="product_counts" value="1" size="1" />
+			[units/sec]
+			<button id='add_product'>
+				add
+			</button>
+		</div>
+		<div>
+			<table id='main_table'>
+				<thead>
+					<tr>
+						<th>生産物名称</th>
+						<th>要求生産・排出速度[units/sec]</th>
+						<th>生産能力</th>
+						<th>生産施設</th>
+						<th>排出能力</th>
+						<th>排出器</th>
+						<th>要求挿入速度</th>
+						<th>挿入能力</th>
+						<th>挿入器</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</body>
+</html>
