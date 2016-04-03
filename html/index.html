@@ -4,12 +4,14 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" href="css/jquery-ui.css" />
+		<link rel="stylesheet" href="css/jquery.treetable.css" type="text/css" />
+		<link rel="stylesheet" href="css/jquery.treetable.theme.default.css" type="text/css" />
 		<script src="lib/jquery-1.12.2.js"></script>
 		<script src="lib/jquery-ui.js"></script>
 		<script src="lib/jquery.combobox.js"></script>
+		<script src="lib/jquery.treetable.js"></script>
 		<script src="js/factorio.js"></script>
-		<script src="js/factorio-recipes.js"></script>
-		<script src="js/factorio-factories.js"></script>
+		<script src="js/factorio-tree.js"></script>
 		<script src="js/factorio-helper.js"></script>
 		<title>Factorio Tree</title>
 		<style type="text/css">
@@ -29,35 +31,40 @@
 			}
 		</style>
 		<script>
-			$(function() {
-				$("#product_counts").spinner({
-					min : 0,
-					icons : {
-						up : "ui-icon-plus",
-						down : "ui-icon-minus"
-					},
-				});
-				$("#combobox").html(Factorio.helper.target_options);
-				$("#combobox").combobox();
-			});
-			$(function() {
-				//				console.log(Factorio.helper.targets);
-				$('#add_product').button();
-				$('#add_product').click(function() {
-					var name,
-					    val;
-					val = $("#combobox").children(':selected')[0].value;
-					if (val === undefined || val == '') {
-						return;
-					}
-					//$('#debug').html('値:' + $("#product_counts").spinner('value') + '<br />name:'+Factorio.recipes[val].name);
-				});
-				//console.log($("#combobox").combobox());
-			});
+            $(function() {
+                Factorio.helper.init("#main_table","recipes.json", function() {
+                    $("#combobox").html(Factorio.helper.options());
+                    $("#combobox").combobox();
+                    $("#product_counts").spinner({
+                        min : 0,
+                        icons : {
+                            up : "ui-icon-plus",
+                            down : "ui-icon-minus"
+                        },
+                    });
+                    $('#add_product').button();
+                    $('#add_product').click(function() {
+                        var name,
+                            val;
+                        val = $("#combobox").children(':selected')[0].value;
+                        if (val === undefined || val == '') {
+                            return;
+                        }
+                        Factorio.tree.root($("#product_counts").spinner('value'), val);
+                    });
+                    $('#clear_product').button();
+                    $('#clear_product').click(function() {
+                        Factorio.tree.clear();
+                    });
+                });
+            });
+            $(function() {
+                //				console.log(Factorio.helper.targets);
+            });
 		</script>
 	</head>
 	<body>
-		<h1>Factorio Chartsheets</h1>
+		<h1>Factorio Tree</h1>
 		<div id='debug'></div>
 		<div class="ui-widget">
 			<label>target item: </label>
@@ -69,20 +76,25 @@
 			<button id='add_product'>
 				add
 			</button>
+			<button id='clear_product'>
+				clear
+			</button>
 		</div>
 		<div>
 			<table id='main_table'>
 				<thead>
 					<tr>
-						<th>生産物名称</th>
-						<th>要求生産・排出速度[units/sec]</th>
+						<th width="1%">生産物名称</th>
+						<th width="1%">要求生産速度[units/sec]</th>
+						<th >生産施設</th>
+						<!--
 						<th>生産能力</th>
-						<th>生産施設</th>
 						<th>排出能力</th>
 						<th>排出器</th>
 						<th>要求挿入速度</th>
 						<th>挿入能力</th>
 						<th>挿入器</th>
+						-->
 					</tr>
 				</thead>
 				<tbody></tbody>

@@ -13,6 +13,7 @@ def start_http(opt={})
 	
 	trap("INT"){ s.shutdown }
   @server_thread = Thread.new do
+    while(Thread.main.stop? != true)do Thread.pass; end
 		s.start
   end
   Thread.stop
