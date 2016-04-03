@@ -1,8 +1,17 @@
 var Factorio = Factorio || {};
 Factorio.helper = {
-    init : function(id,json,func) {
-        $.getJSON(json,{}, function(data) {
-            Factorio.recipes = data;
+    init : function(id, json, func) {
+        $.getJSON(json, {}, function(data) {
+            if (data.label.product_name) {
+                $(id).find('.label_product_name').text(data.label.product_name);
+            }
+            if (data.label.require_product_speed) {
+                $(id).find('.label_product_speed').text(data.label.require_product_speed);
+            }
+            if (data.label.production_facility) {
+                $(id).find('.label_product_facility').text(data.label.production_facility);
+            }
+            Factorio.recipes = data.recipes;
             Factorio.helper.varidate();
             func();
         });
@@ -51,7 +60,7 @@ Factorio.helper = {
         });
     },
     options : function() {
-        var hash=Factorio.recipes;
+        var hash = Factorio.recipes;
         var str = '<option value="" icon="icons/question.png">Select target item...</option>';
         jQuery.each(Factorio.recipes, function(key, val) {
             if (val.factory != undefined) {

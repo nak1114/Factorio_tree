@@ -1,4 +1,10 @@
 {
+"label" : {
+	"product_name" : "生産物名称",
+	"require_product_speed" : "要求生産速度[units/sec]",
+	"production_facility" : "生産施設"
+},
+"recipes" : {
   "hand_mining" : {
     "icon" : "hand-mining.png",
     "name" : "手堀",
@@ -1703,4 +1709,5 @@
     "ingredients": [["rocket_structure", 10], ["rocket_fuel", 10], ["rocket_control_unit", 10]],
     "factory": ["rocket_silo"]
   }
+}
 }

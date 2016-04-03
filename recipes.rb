@@ -32,9 +32,14 @@ TransID={
 category_global=nil
 count_items=0
 
-
 header = <<EOS
 {
+"label" : {
+	"product_name" : "生産物名称",
+	"require_product_speed" : "要求生産速度[units/sec]",
+	"production_facility" : "生産施設"
+},
+"recipes" : {
   "hand_mining" : {
     "icon" : "hand-mining.png",
     "name" : "手堀",
@@ -44,6 +49,12 @@ EOS
 
 header_en = <<EOS
 {
+"label" : {
+	"product_name" : "Product Name",
+	"require_product_speed" : "Require product speed[units/sec]",
+	"production_facility" : "Production facility"
+},
+"recipes" : {
   "hand_mining" : {
     "icon" : "hand-mining.png",
     "name" : "hand mining",
@@ -112,6 +123,7 @@ DATA.read.each_line do |v|
 	count_items=count_items+1
 end
   puts %!  \}!
+	puts %!\}!
 	puts %!\}!
 
 

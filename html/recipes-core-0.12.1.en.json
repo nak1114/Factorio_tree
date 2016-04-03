@@ -1,4 +1,10 @@
 {
+"label" : {
+	"product_name" : "Product Name",
+	"require_product_speed" : "Require product speed[units/sec]",
+	"production_facility" : "Production facility"
+},
+"recipes" : {
   "hand_mining" : {
     "icon" : "hand-mining.png",
     "name" : "hand mining",
@@ -1703,4 +1709,5 @@
     "ingredients": [["rocket_structure", 10], ["rocket_fuel", 10], ["rocket_control_unit", 10]],
     "factory": ["rocket_silo"]
   }
+}
 }
