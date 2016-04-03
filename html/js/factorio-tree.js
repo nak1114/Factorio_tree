@@ -21,12 +21,12 @@ Factorio.tree = {
     },
     name_with_icon : function(id) {
         var tgt = Factorio.recipes[id];
-        var str = $("<img />").attr('src', 'icons/' + tgt.icon).attr('alt', id).addClass("name-icon").prop('outerHTML');
+        var str = $("<img />").attr('src', tgt.icon).attr('alt', id).addClass("name-icon").prop('outerHTML');
         return str + tgt.name;
     },
     icon : function(id) {
         var tgt = Factorio.recipes[id];
-        var str = $("<img />").attr('src', 'icons/' + tgt.icon).attr('alt', id).addClass("name-icon").prop('outerHTML');
+        var str = $("<img />").attr('src', tgt.icon).attr('alt', id).addClass("name-icon").prop('outerHTML');
         return str;
     },
     node : function(req_spd, id, parent_node) {

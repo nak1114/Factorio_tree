@@ -55,7 +55,7 @@ Factorio.helper = {
         var str = '<option value="" icon="icons/question.png">Select target item...</option>';
         jQuery.each(Factorio.recipes, function(key, val) {
             if (val.factory != undefined) {
-                str = str + '<option value="' + key + '" icon="icons/' + val.icon + '">' + val.query + '</option>';
+                str = str + '<option value="' + key + '" icon="' + val.icon + '">' + val.query + '</option>';
             }
         });
         return str;

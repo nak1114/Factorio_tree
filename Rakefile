@@ -8,3 +8,8 @@ task :default => :spec
 task :init do
   sh "bundle install --path vendor/bundle"
 end
+
+task :recipe do
+  sh "ruby recipes.rb jp >html/recipes-core-0.12.1.jp.json"
+  sh "ruby recipes.rb en >html/recipes-core-0.12.1.en.json"
+end

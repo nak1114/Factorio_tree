@@ -29,10 +29,14 @@
 				width: 32px;
 				height: 32px;
 			}
+			.name-icon {
+				width: 32px;
+				height: 32px;
+			}
 		</style>
 		<script>
             $(function() {
-                Factorio.helper.init("#main_table","recipes.json", function() {
+                Factorio.helper.init("#main_table","recipes-core-0.12.1.jp.json", function() {
                     $("#combobox").html(Factorio.helper.options());
                     $("#combobox").combobox();
                     $("#product_counts").spinner({
