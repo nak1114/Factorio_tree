@@ -10,6 +10,7 @@
 		<script src="lib/jquery-ui.js"></script>
 		<script src="lib/jquery.combobox.js"></script>
 		<script src="lib/jquery.treetable.js"></script>
+		<script src="lib/jquery.getparameter.js"></script>
 		<script src="js/factorio.js"></script>
 		<script src="js/factorio-tree.js"></script>
 		<script src="js/factorio-helper.js"></script>
@@ -36,7 +37,10 @@
 		</style>
 		<script>
             $(function() {
-                Factorio.helper.init("#main_table","recipes-core-0.12.1.jp.json", function() {
+            	var json="recipes-core-0.12.1.jp.json";
+            	var para=$.getParameter();
+            	if(para.recipes){json=para.recipes;}
+                Factorio.helper.init("#main_table",json, function() {
                     $("#combobox").html(Factorio.helper.options());
                     $("#combobox").combobox();
                     $("#product_counts").spinner({
@@ -69,7 +73,7 @@
 	</head>
 	<body>
 		<h1>Factorio Tree</h1>
-		<div id='debug'></div>
+		<div id='label_jsondata'>none</div>
 		<div class="ui-widget">
 			<label>target item: </label>
 			<select id="combobox">

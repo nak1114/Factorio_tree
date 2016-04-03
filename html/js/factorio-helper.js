@@ -2,6 +2,9 @@ var Factorio = Factorio || {};
 Factorio.helper = {
     init : function(id, json, func) {
         $.getJSON(json, {}, function(data) {
+            if (data.title) {
+                $("#label_jsondata").text(data.title);
+            }
             if (data.label.product_name) {
                 $(id).find('.label_product_name').text(data.label.product_name);
             }

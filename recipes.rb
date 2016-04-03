@@ -23,6 +23,23 @@ FactryList={
 "steel_furnace"        =>	%!    "production_efficiency" : 1.0 !,
 "electric_furnace"     =>	%!    "production_efficiency" : 1.0 !,
 "chemical_plant"       =>	%!    "production_efficiency" : 1.0 !,
+"basic_transport_belt"             => %!    "transport_capacity" : 1.875 !,
+"fast_transport_belt"              => %!    "transport_capacity" : 3.75  !,
+"express_transport_belt"           => %!    "transport_capacity" : 5.625 !,
+"basic_transport_belt_to_ground"   => %!    "transport_capacity" : 1.875 !,
+"fast_transport_belt_to_ground"    => %!    "transport_capacity" : 3.75  !,
+"express_transport_belt_to_ground" => %!    "transport_capacity" : 5.625 !,
+"basic_splitter"                   => %!    "transport_capacity" : 1.875 !,
+"express_splitter"                 => %!    "transport_capacity" : 3.75  !,
+"fast_splitter"                    => %!    "transport_capacity" : 5.625 !,
+"pipe"                => %!    "insert_capacity" : 10 !,
+"pipe_to_ground"      => %!    "insert_capacity" : 10 !,
+"small_pump"          => %!    "insert_capacity" : 10 !,
+"burner_inserter"     => %!    "insert_capacity" : 0.6 !,
+"basic_inserter"      => %!    "insert_capacity" : 0.84 !,
+"long_handed_inserter"=> %!    "insert_capacity" : 1.2 !,
+"fast_inserter"       => %!    "insert_capacity" : 2.1 !,
+"smart_inserter"      => %!    "insert_capacity" : 2.1 !,
 }
 
 TransID={
@@ -34,6 +51,7 @@ count_items=0
 
 header = <<EOS
 {
+"title" : "core-0.12.1 , 日本語",
 "label" : {
 	"product_name" : "生産物名称",
 	"require_product_speed" : "要求生産速度[units/sec]",
@@ -49,6 +67,7 @@ EOS
 
 header_en = <<EOS
 {
+"title" : "core-0.12.1 , English",
 "label" : {
 	"product_name" : "Product Name",
 	"require_product_speed" : "Require product speed[units/sec]",

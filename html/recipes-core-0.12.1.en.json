@@ -1,4 +1,5 @@
 {
+"title" : "core-0.12.1 , English",
 "label" : {
 	"product_name" : "Product Name",
 	"require_product_speed" : "Require product speed[units/sec]",
@@ -538,7 +539,8 @@
     "time": 0.5,
     "category": "crafting",
     "ingredients": [["iron_plate", 1], ["iron_gear_wheel", 1]],
-    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"]
+    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"],
+    "transport_capacity" : 1.875 
   },
   "fast_transport_belt": {
     "icon": "icons/fast-transport-belt.png" ,
@@ -548,7 +550,8 @@
     "time": 0.5,
     "category": "crafting",
     "ingredients": [["iron_gear_wheel", 5], ["basic_transport_belt", 1]],
-    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"]
+    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"],
+    "transport_capacity" : 3.75  
   },
   "express_transport_belt": {
     "icon": "icons/express-transport-belt.png" ,
@@ -558,7 +561,8 @@
     "time": 0.5,
     "category": "crafting",
     "ingredients": [["iron_gear_wheel", 5], ["fast_transport_belt", 1], ["lubricant", 2]],
-    "factory": ["assembling_machine_2", "assembling_machine_3"]
+    "factory": ["assembling_machine_2", "assembling_machine_3"],
+    "transport_capacity" : 5.625 
   },
   "basic_transport_belt_to_ground": {
     "icon": "icons/basic-transport-belt-to-ground.png" ,
@@ -568,7 +572,8 @@
     "time": 1.0,
     "category": "crafting",
     "ingredients": [["iron_plate", 10], ["basic_transport_belt", 5]],
-    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"]
+    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"],
+    "transport_capacity" : 1.875 
   },
   "fast_transport_belt_to_ground": {
     "icon": "icons/fast-transport-belt-to-ground.png" ,
@@ -578,7 +583,8 @@
     "time": 0.5,
     "category": "crafting",
     "ingredients": [["iron_gear_wheel", 20], ["basic_transport_belt_to_ground", 2]],
-    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"]
+    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"],
+    "transport_capacity" : 3.75  
   },
   "express_transport_belt_to_ground": {
     "icon": "icons/express-transport-belt-to-ground.png" ,
@@ -588,7 +594,8 @@
     "time": 0.5,
     "category": "crafting",
     "ingredients": [["iron_gear_wheel", 40], ["fast_transport_belt_to_ground", 2]],
-    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"]
+    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"],
+    "transport_capacity" : 5.625 
   },
   "basic_splitter": {
     "icon": "icons/basic-splitter.png" ,
@@ -598,7 +605,8 @@
     "time": 1.0,
     "category": "crafting",
     "ingredients": [["electronic_circuit", 5], ["iron_plate", 5], ["basic_transport_belt", 4]],
-    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"]
+    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"],
+    "transport_capacity" : 1.875 
   },
   "fast_splitter": {
     "icon": "icons/fast-splitter.png" ,
@@ -608,7 +616,8 @@
     "time": 2.0,
     "category": "crafting",
     "ingredients": [["basic_splitter", 1], ["iron_gear_wheel", 10], ["electronic_circuit", 10]],
-    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"]
+    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"],
+    "transport_capacity" : 5.625 
   },
   "express_splitter": {
     "icon": "icons/express-splitter.png" ,
@@ -618,7 +627,8 @@
     "time": 2.0,
     "category": "crafting",
     "ingredients": [["fast_splitter", 1], ["iron_gear_wheel", 10], ["advanced_circuit", 10], ["lubricant", 8]],
-    "factory": ["assembling_machine_2", "assembling_machine_3"]
+    "factory": ["assembling_machine_2", "assembling_machine_3"],
+    "transport_capacity" : 3.75  
   },
   "pipe": {
     "icon": "icons/pipe.png" ,
@@ -628,7 +638,8 @@
     "time": 0.5,
     "category": "crafting",
     "ingredients": [["iron_plate", 1]],
-    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"]
+    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"],
+    "insert_capacity" : 10 
   },
   "pipe_to_ground": {
     "icon": "icons/pipe-to-ground.png" ,
@@ -638,7 +649,8 @@
     "time": 0.5,
     "category": "crafting",
     "ingredients": [["pipe", 10], ["iron_plate", 5]],
-    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"]
+    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"],
+    "insert_capacity" : 10 
   },
   "small_pump": {
     "icon": "icons/small-pump.png" ,
@@ -648,7 +660,8 @@
     "time": 2.0,
     "category": "crafting",
     "ingredients": [["electric_engine_unit", 1], ["steel_plate", 1], ["pipe", 1]],
-    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"]
+    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"],
+    "insert_capacity" : 10 
   },
   "burner_inserter": {
     "icon": "icons/burner-inserter.png" ,
@@ -658,7 +671,8 @@
     "time": 0.5,
     "category": "crafting",
     "ingredients": [["iron_plate", 1], ["iron_gear_wheel", 1]],
-    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"]
+    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"],
+    "insert_capacity" : 0.6 
   },
   "basic_inserter": {
     "icon": "icons/basic-inserter.png" ,
@@ -668,7 +682,8 @@
     "time": 0.5,
     "category": "crafting",
     "ingredients": [["electronic_circuit", 1], ["iron_gear_wheel", 1], ["iron_plate", 1]],
-    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"]
+    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"],
+    "insert_capacity" : 0.84 
   },
   "long_handed_inserter": {
     "icon": "icons/long-handed-inserter.png" ,
@@ -678,7 +693,8 @@
     "time": 0.5,
     "category": "crafting",
     "ingredients": [["iron_gear_wheel", 1], ["iron_plate", 1], ["basic_inserter", 1]],
-    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"]
+    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"],
+    "insert_capacity" : 1.2 
   },
   "fast_inserter": {
     "icon": "icons/fast-inserter.png" ,
@@ -688,7 +704,8 @@
     "time": 0.5,
     "category": "crafting",
     "ingredients": [["electronic_circuit", 2], ["iron_plate", 2], ["basic_inserter", 1]],
-    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"]
+    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"],
+    "insert_capacity" : 2.1 
   },
   "smart_inserter": {
     "icon": "icons/smart-inserter.png" ,
@@ -698,7 +715,8 @@
     "time": 0.5,
     "category": "crafting",
     "ingredients": [["fast_inserter", 1], ["electronic_circuit", 4]],
-    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"]
+    "factory": ["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"],
+    "insert_capacity" : 2.1 
   },
   "small_electric_pole": {
     "icon": "icons/small-electric-pole.png" ,
