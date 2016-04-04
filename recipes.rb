@@ -59,7 +59,7 @@ header = <<EOS
 },
 "recipes" : {
   "hand_mining" : {
-    "icon" : "hand-mining.png",
+    "icon" : "icons/hand-mining.png",
     "name" : "手堀",
     "production_efficiency" : 1.0
   },
@@ -75,7 +75,7 @@ header_en = <<EOS
 },
 "recipes" : {
   "hand_mining" : {
-    "icon" : "hand-mining.png",
+    "icon" : "icons/hand-mining.png",
     "name" : "hand mining",
     "production_efficiency" : 1.0
   },

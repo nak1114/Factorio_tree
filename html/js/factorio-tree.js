@@ -4,8 +4,8 @@ Factorio.tree = {
         var h = Factorio.tree;
         h.table = id;
         h.cur = 1;
-        $(h.table).children("tbody").html("");
-        $(h.table).treetable({
+        h.table.children("tbody").html("");
+        h.table.treetable({
             expandable : true
         });
     },
@@ -46,7 +46,7 @@ Factorio.tree = {
         rows = rows + "<tr data-tt-id='" + cur;
         if (parent_node) {
             rows = rows + "' data-tt-parent-id='" + parent_node;
-            node = $(h.table).treetable("node", parent_node);
+            node = h.table.treetable("node", parent_node);
         }
         rows = rows + "'>";
 
@@ -56,7 +56,7 @@ Factorio.tree = {
 
         rows = rows + "</tr>";
 
-        $(h.table).treetable("loadBranch", node, rows);
+        h.table.treetable("loadBranch", node, rows);
         $.each(tgt.ingredients, function() {
             h.node(req_spd * this[1], this[0], cur);
         });

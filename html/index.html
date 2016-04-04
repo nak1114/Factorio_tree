@@ -3,67 +3,54 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script src="lib/jquery-1.12.2.js"></script>
+
 		<link rel="stylesheet" href="css/jquery-ui.css" />
+		<script src="lib/jquery-ui.js"></script>
+
+		<script src="lib/jquery.getparameter.js"></script>
+
 		<link rel="stylesheet" href="css/jquery.treetable.css" type="text/css" />
 		<link rel="stylesheet" href="css/jquery.treetable.theme.default.css" type="text/css" />
-		<script src="lib/jquery-1.12.2.js"></script>
-		<script src="lib/jquery-ui.js"></script>
-		<script src="lib/jquery.combobox.js"></script>
 		<script src="lib/jquery.treetable.js"></script>
-		<script src="lib/jquery.getparameter.js"></script>
+
+		<link href="css/select2.min.css" rel="stylesheet" />
+		<script src="lib/select2.min.js"></script>
+
 		<script src="js/factorio.js"></script>
 		<script src="js/factorio-tree.js"></script>
 		<script src="js/factorio-helper.js"></script>
+
 		<title>Factorio Tree</title>
+
 		<style type="text/css">
-			.ui-autocomplete {
-				max-height: 100px;
-				overflow-y: auto;
-				overflow-x: hidden;
-				padding-right: 20px;
-			}
-			.custom-combobox-input {
-				width: 500px;
-			}
-			.custom-combobox-icon {
-				vertical-align: middle;
-				width: 32px;
-				height: 32px;
-			}
 			.name-icon {
 				width: 32px;
 				height: 32px;
 			}
+			.select2-img-icon {
+				width: 32px;
+				height: 32px;
+				vertical-align: middle;
+			}
+			#test .select2-selection--single {
+				height: 34px;
+			}
+			#test .select2-selection--single .select2-selection__arrow {
+				height: 30px;
+			}
+			#test .select2-container--default .select2-selection--multiple .select2-selection__choice {
+			margin-top: 0px;
+			}
 		</style>
 		<script>
             $(function() {
-            	var json="recipes-core-0.12.1.jp.json";
-            	var para=$.getParameter();
-            	if(para.recipes){json=para.recipes;}
-                Factorio.helper.init("#main_table",json, function() {
-                    $("#combobox").html(Factorio.helper.options());
-                    $("#combobox").combobox();
-                    $("#product_counts").spinner({
-                        min : 0,
-                        icons : {
-                            up : "ui-icon-plus",
-                            down : "ui-icon-minus"
-                        },
-                    });
-                    $('#add_product').button();
-                    $('#add_product').click(function() {
-                        var name,
-                            val;
-                        val = $("#combobox").children(':selected')[0].value;
-                        if (val === undefined || val == '') {
-                            return;
-                        }
-                        Factorio.tree.root($("#product_counts").spinner('value'), val);
-                    });
-                    $('#clear_product').button();
-                    $('#clear_product').click(function() {
-                        Factorio.tree.clear();
-                    });
+                var def ={recipes:"recipes/core/0.12.1/en.json"};
+                var para =$.extend(def, $.getParameter());
+                var h = Factorio.helper;
+                console.log(para);
+
+                h.init("#main_table", para.recipes, function() {
                 });
             });
             $(function() {
@@ -73,40 +60,13 @@
 	</head>
 	<body>
 		<h1>Factorio Tree</h1>
-		<div id='label_jsondata'>none</div>
-		<div class="ui-widget">
-			<label>target item: </label>
-			<select id="combobox">
-				<option value="">Select one...</option>
-			</select>
-			<input id="product_counts" value="1" size="1" />
-			[units/sec]
-			<button id='add_product'>
-				add
-			</button>
-			<button id='clear_product'>
-				clear
-			</button>
+		<div id='test'>
+			can't read JSON file.
 		</div>
 		<div>
-			<table id='main_table'>
-				<thead>
-					<tr>
-						<th width="1%" class='label_product_name'>Product Name</th>
-						<th width="1%" class='label_product_speed'>Require product speed[units/sec]</th>
-						<th            class='label_product_facility'>Production facility</th>
-						<!--
-						<th>生産能力</th>
-						<th>排出能力</th>
-						<th>排出器</th>
-						<th>要求挿入速度</th>
-						<th>挿入能力</th>
-						<th>挿入器</th>
-						-->
-					</tr>
-				</thead>
-				<tbody></tbody>
-			</table>
+			<a href="index.html?recipes=recipes/core/0.12.1/en.json">English</a>
+			/
+			<a href="index.html?recipes=recipes/core/0.12.1/ja.json">Japanese</a>
 		</div>
 	</body>
 </html>
