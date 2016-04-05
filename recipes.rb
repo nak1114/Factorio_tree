@@ -18,7 +18,7 @@ FluidList=[
   "heavy_oil",
   "light_oil",
   "petroleum_gas",
-  "lubricant","water"
+  "lubricant","water","crude_oil",
 ]
 FactryList={
 "burner_mining_drill"  => %!    "production_efficiency" : 1.0 !,
@@ -67,7 +67,8 @@ header = <<EOS
 "label" : {
   "product_name" : "生産物名称",
   "require_product_speed" : "要求生産速度[units/sec]",
-  "production_facility" : "生産施設"
+  "production_facility" : "生産施設",
+  "product_ejector" : "排出装置"
 },
 "facilities" : {
   "crafting"   : {"list" : [["assembling_machine_1", "assembling_machine_2"],
@@ -86,6 +87,14 @@ header = <<EOS
   "pump_oil"   : {"list" : [["pumpjack"]]},
   "pomp_water" : {"list" : [["offshore_pump"]]},
   "chemistry"  : {"list" : [["chemical_plant"]]}
+},
+"ejectors" : {
+  "solid"   : {"list" : [["basic_inserter"],
+                         ["long_handed_inserter"],
+                         ["fast_inserter"],
+                         ["smart_inserter"],
+                         ["burner_inserter"]]},
+  "fluid"   : {"list" : [["pipe"]]}
 },
 "recipes" : {
   "hand_mining" : {
@@ -101,7 +110,8 @@ header_en = <<EOS
 "label" : {
   "product_name" : "Product Name",
   "require_product_speed" : "Require product speed[units/sec]",
-  "production_facility" : "Production facility"
+  "production_facility" : "Production facility",
+  "product_ejector" : "Ejector"
 },
 "facilities" : {
   "crafting"   : {"list" : [["assembling_machine_1", "assembling_machine_2"],
@@ -120,6 +130,14 @@ header_en = <<EOS
   "pump_oil"   : {"list" : [["pumpjack"]]},
   "pomp_water" : {"list" : [["offshore_pump"]]},
   "chemistry"  : {"list" : [["chemical_plant"]]}
+},
+"ejectors" : {
+  "solid"   : {"list" : [["basic_inserter"],
+                         ["long_handed_inserter"],
+                         ["fast_inserter"],
+                         ["smart_inserter"],
+                         ["burner_inserter"]]},
+  "fluid"   : {"list" : [["pipe"]]}
 },
 "recipes" : {
   "hand_mining" : {

@@ -3,7 +3,8 @@
 "label" : {
   "product_name" : "Product Name",
   "require_product_speed" : "Require product speed[units/sec]",
-  "production_facility" : "Production facility"
+  "production_facility" : "Production facility",
+  "product_ejector" : "Ejector"
 },
 "facilities" : {
   "crafting"   : {"list" : [["assembling_machine_1", "assembling_machine_2"],
@@ -22,6 +23,14 @@
   "pump_oil"   : {"list" : [["pumpjack"]]},
   "pomp_water" : {"list" : [["offshore_pump"]]},
   "chemistry"  : {"list" : [["chemical_plant"]]}
+},
+"ejectors" : {
+  "solid"   : {"list" : [["basic_inserter"],
+                         ["long_handed_inserter"],
+                         ["fast_inserter"],
+                         ["smart_inserter"],
+                         ["burner_inserter"]]},
+  "fluid"   : {"list" : [["pipe"]]}
 },
 "recipes" : {
   "hand_mining" : {
@@ -90,7 +99,7 @@
     "query": "Crude oil",
     "quantity": 10.0,
     "time": 0.5,
-    "cargo": "solid",
+    "cargo": "fluid",
     "category": "resource",
     "ingredients": [],
     "factory": ["pump_oil", 0]

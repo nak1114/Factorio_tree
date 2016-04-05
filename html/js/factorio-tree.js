@@ -45,7 +45,8 @@ Factorio.tree = {
 
         rows = rows + "<td>" + h.name_with_icon(tgt) + "</td>";
         rows = rows + "<td>" + req_spd.toFixed(2) + "</td>";
-        rows = rows + "<td>calc</td>";
+        rows = rows + "<td>calc Facility</td>";
+        rows = rows + "<td>calc Ejecter</td>";
 
         rows = rows + "</tr>";
 
@@ -67,27 +68,34 @@ Factorio.tree = {
             return;
         }
         var par = h.node(req_spd, id, null);
-        h.recalc();
+        h.recalc(15);
     },
-    recalc : function() {
+    recalc : function(flg) {
         var h = Factorio.tree;
         var tmp=h.table.find("tbody tr");
         tmp.each(function() {
             var tr = $(this);
             var req_spd = tr.attr('req_spd');
             var id = tr.attr('item');
-            var td = tr.find('td:eq(2)');
 
             var tgt = Factorio.recipes[id];
+
             var fac = tgt.factory;
-            var effi = Factorio.facilities[fac[0]].getEffi(fac[1]);
             var faci = Factorio.facilities[fac[0]].getItem(fac[1]);
-            var speed = tgt.quantity / tgt.time * effi;
+            var speed = tgt.quantity / tgt.time * faci.production_efficiency;
             //[u/s]
             var count = req_spd / speed;
             var str = h.icon(faci) + "*" + count.toFixed(2) ;
+            tr.find('td:eq(2)').html(str);
+
+            var cargo = tgt.cargo;
+            var faci = Factorio.ejectors[cargo].getItem(0);
+            var speed = faci.insert_capacity;
+            //[u/s]
+            var count = req_spd / speed;
+            var str = h.icon(faci) + "*" + count.toFixed(2) ;
+            tr.find('td:eq(3)').html(str);
             
-            td.html(str);
 
         });
     },

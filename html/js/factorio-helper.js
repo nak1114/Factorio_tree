@@ -8,7 +8,8 @@ Factorio.helper = {
             <tr>
             <th width="1%" class='Label_product_name'>Product Name</th>
             <th width="1%" class='Label_require_product_speed'>Require product speed[units/sec]</th>
-            <th            class='Label_production_facility'>Production facility</th>
+            <th width="1%" class='Label_production_facility'>Production facility</th>
+            <th            class='Label_product_ejector'>Ejector</th>
             <!--
             <th>生産能力</th>
             <th>排出能力</th>
@@ -62,24 +63,16 @@ Factorio.helper = {
             Factorio.tree.clear();
         });
     },
-    _getFacID_multi : function() {
-        var v = this;
-        var val = this.sel.find(":selected").attr('value');
-        return Number(val);
-    },
-    _getEffi : function(num) {
-        var v = this;
-        var sel = v.getID();
-        var item = v.list[sel][num];
-        var val = Factorio.recipes[item].production_efficiency;
-        var val = val ? val : 1.0;
-        return val;
-    },
     _getItem : function(num) {
         var v = this;
         var sel = v.getID();
         var item = v.list[sel][num];
         return Factorio.recipes[item];
+    },
+    _getFacID_multi : function() {
+        var v = this;
+        var val = this.sel.find(":selected").attr('value');
+        return Number(val);
     },
     _getFacID_single : function() {
         return 0;
@@ -87,20 +80,19 @@ Factorio.helper = {
     makeDivOption : function(root) {
         var h = Factorio.helper;
         var div = $("<div>").appendTo(root).addClass("option ui-widget");
-        $("<label>").appendTo(div).text("default facirities: ");
 
         var cfg = Factorio.config.facilities;
         if (!$.isArray(cfg)) {
             cfg = [];
         }
 
+        $("<label>").appendTo(div).text("default facirities: ");
         $.each(Factorio.facilities, function(key, val) {
             var ary = [];
             var v = this;
             var def = Number(cfg.shift());
 
             v.getItem = h._getItem;
-            v.getEffi = h._getEffi;
             if (val.list.length < 2) {
                 v.getID = h._getFacID_single;
             } else {
@@ -122,11 +114,46 @@ Factorio.helper = {
                     placeholder : 'Select a item',
                     minimumResultsForSearch : Infinity,
                     data : ary,
-                }).on("change", function (e) { Factorio.tree.recalc(); });
+                }).on("change", function (e) { Factorio.tree.recalc(1); });
                 v.sel = sel;
                 v.getID = h._getFacID_multi;
             }
         });
+
+        $("<label>").appendTo(div).text("default ejectors: ");
+        $.each(Factorio.ejectors, function(key, val) {
+            var ary = [];
+            var v = this;
+            var def = Number(cfg.shift());
+
+            v.getItem = h._getItem;
+            if (val.list.length < 2) {
+                v.getID = h._getFacID_single;
+            } else {
+                def = (def && (0 <= def) && (def < val.list.length)) ? def : 0;
+                $.each(val.list, function(i) {
+                    var opt = {};
+                    opt.id = i;
+                    opt.text = '';
+                    opt.item = Factorio.recipes[this[0]];
+                    if (i == def) {
+                        opt.selected = 'selected';
+                    }
+                    ary.push(opt);
+                });
+                var sel = $('<select>').appendTo(div).addClass("option-ejectors-" + key).select2({
+                    templateResult : h.formatState_icononly,
+                    templateSelection : h.formatState,
+                    width : '60px',
+                    placeholder : 'Select a item',
+                    minimumResultsForSearch : Infinity,
+                    data : ary,
+                }).on("change", function (e) { Factorio.tree.recalc(2); });
+                v.sel = sel;
+                v.getID = h._getFacID_multi;
+            }
+        });
+
 
         $("<label>").appendTo(div).text("default marge item(s): ");
         $("<select multiple='multiple'>").appendTo(div).addClass("option-filter").select2({
@@ -141,7 +168,6 @@ Factorio.helper = {
                 return this.value;
             });
             var val = root.find(".query-item :selected").attr('value');
-            var count = h.getCount(root.find(".query-count").spinner('value'), val);
             return count;
         });
         $("<button>").appendTo(div).addClass('option-save-to-cookie').text("save to cookie").click(function() {
@@ -164,17 +190,6 @@ Factorio.helper = {
             return;
         });
     },
-    getCount : function(req_spd, id) {
-        var h = Factorio.tree;
-        var tgt = Factorio.recipes[id];
-        var fac = tgt.factory;
-        var effi = Factorio.facilities[fac[0]].getEffi(fac[1]);
-        var speed = tgt.quantity / tgt.time * effi;
-        //[u/s]
-        var count = req_spd / speed;
-        console.log("getCount", effi, speed, count);
-
-    },
     makeDivTable : function(root) {
         var h = Factorio.helper;
         var div = $("<div>").appendTo(root).addClass("table");
@@ -195,6 +210,7 @@ Factorio.helper = {
         Factorio.config = para;
         $.getJSON(para.recipes, {}, function(data) {
             Factorio.facilities = data.facilities;
+            Factorio.ejectors = data.ejectors;
             Factorio.recipes = data.recipes;
             Factorio.helper.varidate();
 
