@@ -1,5 +1,6 @@
 var Factorio = Factorio || {};
 Factorio.helper = {
+    
     _table_str : ( function() {
             return (function () {/*
             <table class='table-main'>
@@ -121,7 +122,7 @@ Factorio.helper = {
                     placeholder : 'Select a item',
                     minimumResultsForSearch : Infinity,
                     data : ary,
-                });
+                }).on("change", function (e) { Factorio.tree.recalc(); });
                 v.sel = sel;
                 v.getID = h._getFacID_multi;
             }

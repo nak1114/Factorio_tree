@@ -30,12 +30,6 @@ Factorio.tree = {
     node : function(req_spd, id, parent_node) {
         var h = Factorio.tree;
         var tgt = Factorio.recipes[id];
-        var fac = tgt.factory;
-        var effi = Factorio.facilities[fac[0]].getEffi(fac[1]);
-        var faci = Factorio.facilities[fac[0]].getItem(fac[1]);
-        var speed = tgt.quantity / tgt.time * effi;
-        //[u/s]
-        var count = req_spd / speed;
 
         var cur = h.cur;
         h.cur++;
@@ -47,11 +41,11 @@ Factorio.tree = {
             rows = rows + "' data-tt-parent-id='" + parent_node;
             node = h.table.treetable("node", parent_node);
         }
-        rows = rows + "' req_spd='"+req_spd+"' item='"+id+"' >";
+        rows = rows + "' req_spd='" + req_spd + "' item='" + id + "' >";
 
         rows = rows + "<td>" + h.name_with_icon(tgt) + "</td>";
         rows = rows + "<td>" + req_spd.toFixed(2) + "</td>";
-        rows = rows + "<td>" + h.icon(faci) + "*" + count.toFixed(2) + "</td>";
+        rows = rows + "<td>calc</td>";
 
         rows = rows + "</tr>";
 
@@ -73,6 +67,29 @@ Factorio.tree = {
             return;
         }
         var par = h.node(req_spd, id, null);
+        h.recalc();
+    },
+    recalc : function() {
+        var h = Factorio.tree;
+        var tmp=h.table.find("tbody tr");
+        tmp.each(function() {
+            var tr = $(this);
+            var req_spd = tr.attr('req_spd');
+            var id = tr.attr('item');
+            var td = tr.find('td:eq(2)');
+
+            var tgt = Factorio.recipes[id];
+            var fac = tgt.factory;
+            var effi = Factorio.facilities[fac[0]].getEffi(fac[1]);
+            var faci = Factorio.facilities[fac[0]].getItem(fac[1]);
+            var speed = tgt.quantity / tgt.time * effi;
+            //[u/s]
+            var count = req_spd / speed;
+            var str = h.icon(faci) + "*" + count.toFixed(2) ;
+            
+            td.html(str);
+
+        });
     },
 };
 

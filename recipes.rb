@@ -149,8 +149,8 @@ DATA.read.each_line do |v|
 	query  =s[1]
 	count  =s[3].to_f
 	time   =s[6].to_f
-	recipe =s[2].gsub('-','_').scan(/(\w+)\.png(?:\*(\d+))?/).map{|v| [v[0],(v[1]||1).to_i]}
-	factory=s[4].gsub('-','_').scan(/(\w+)\.png/).map{|v| v[0]}
+	recipe =s[2].gsub('-','_').scan(/(\w+)\.png(?:\*(\d+))?/).map{|m| [m[0],(m[1]||1).to_i]}
+	factory=s[4].gsub('-','_').scan(/(\w+)\.png/).map{|m| m[0]}
 	facility=nil
 	cargo=:solid
 
