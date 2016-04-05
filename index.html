@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script src="lib/jquery-1.12.2.js"></script>
+		<script src="lib/js.cookie.js"></script>
+
+		<link rel="stylesheet" href="css/jquery-ui.css" />
+		<script src="lib/jquery-ui.js"></script>
+
+		<script src="lib/jquery.getparameter.js"></script>
+
+		<link rel="stylesheet" href="css/jquery.treetable.css" type="text/css" />
+		<link rel="stylesheet" href="css/jquery.treetable.theme.default.css" type="text/css" />
+		<script src="lib/jquery.treetable.js"></script>
+
+		<link href="css/select2.min.css" rel="stylesheet" />
+		<script src="lib/select2.min.js"></script>
+
+		<script src="js/factorio.js"></script>
+		<script src="js/factorio-tree.js"></script>
+		<script src="js/factorio-helper.js"></script>
+
+		<title>Factorio Tree</title>
+		<link rel="shortcut icon" href="icons/advanced-circuit.png" />
+		<style type="text/css">
+			.Factorio_tree .name-icon {
+				width: 32px;
+				height: 32px;
+			}
+			.Factorio_tree .select2-img-icon {
+				width: 32px;
+				height: 32px;
+				vertical-align: middle;
+			}
+			.Factorio_tree .select2-selection--single {
+				height: 34px;
+			}
+			.Factorio_tree .select2-selection--single .select2-selection__arrow {
+				height: 30px;
+			}
+			.Factorio_tree .select2-container--default .select2-selection--multiple .select2-selection__choice {
+				margin-top: 0px;
+			}
+		</style>
+		<script>
+            $(function() {
+                var def = {
+                    recipes : "recipes/core/0.12.1/en.json"
+                };
+                var cookies=Cookies.getJSON('factorio');
+                var para = $.extend({},def,cookies, $.getParameter());
+                var h = Factorio.helper;
+                console.log(para);
+
+                h.init($("#test"), para, function() {
+                });
+            });
+            $(function() {
+                //console.log(Object.keys(test));
+            });
+		</script>
+	</head>
+	<body>
+		<h1>Factorio Tree</h1>
+		<div id='test'>
+			can't read JSON file.
+		</div>
+		<div>
+			<a href="index.html?recipes=recipes/core/0.12.1/en.json">English</a>
+			/
+			<a href="index.html?recipes=recipes/core/0.12.1/ja.json">Japanese</a>
+		</div>
+	</body>
+</html>
