@@ -64,7 +64,7 @@ Factorio.helper = {
     _getFacID_multi : function() {
         var v = this;
         var val = this.sel.find(":selected").attr('value');
-        return val;
+        return Number(val);
     },
     _getEffi : function(num) {
         var v = this;
@@ -88,8 +88,10 @@ Factorio.helper = {
         var div = $("<div>").appendTo(root).addClass("option ui-widget");
         $("<label>").appendTo(div).text("default facirities: ");
 
-        //var cfg=["3","2","hoge","-1"];
-        var cfg = [];
+        var cfg = Factorio.config.facilities;
+        if (!$.isArray(cfg)) {
+            cfg = [];
+        }
 
         $.each(Factorio.facilities, function(key, val) {
             var ary = [];
@@ -141,6 +143,25 @@ Factorio.helper = {
             var count = h.getCount(root.find(".query-count").spinner('value'), val);
             return count;
         });
+        $("<button>").appendTo(div).addClass('option-save-to-cookie').text("save to cookie").click(function() {
+            var ary=[];
+            var ary2=[];
+            var val = root.find(".option-filter :selected").each(function() {
+                ary.push(this.value);
+            });
+            $.each(Factorio.facilities, function(key, val) {
+                ary2.push(val.getID());
+            });
+            Factorio.config.filter = ary;
+            Factorio.config.facilities = ary2;
+            Cookies.set('factorio',Factorio.config);
+
+            return;
+        });
+        $("<button>").appendTo(div).addClass('option-delete-cookie').text("delete cookie").click(function() {
+            Cookies.remove('factorio');
+            return;
+        });
     },
     getCount : function(req_spd, id) {
         var h = Factorio.tree;
@@ -169,8 +190,9 @@ Factorio.helper = {
             root.find('.Label_' + k).text(v);
         });
     },
-    init : function(root, json, func) {
-        $.getJSON(json, {}, function(data) {
+    init : function(root, para, func) {
+        Factorio.config = para;
+        $.getJSON(para.recipes, {}, function(data) {
             Factorio.facilities = data.facilities;
             Factorio.recipes = data.recipes;
             Factorio.helper.varidate();
@@ -194,18 +216,18 @@ Factorio.helper = {
             var flg = true;
 
             if (val.list === undefined) {
-                console.log('facilities:', 'undefined list.in '+ key);
+                console.log('facilities:', 'undefined list.in ' + key);
                 val.list = [[key]];
             } else if (!$.isArray(val.list)) {
-                console.log('facilities:', 'list is not Array<Array>.in '+ key);
+                console.log('facilities:', 'list is not Array<Array>.in ' + key);
                 val.list = [[val.list]];
             } else if (val.list.length == 0) {
-                console.log('facilities:', 'list is empty.in '+ key);
+                console.log('facilities:', 'list is empty.in ' + key);
                 val.list = [[key]];
             } else {
                 $.each(val.list, function(i) {
                     if (!$.isArray(this)) {
-                        console.log('facilities:', "list's Array is empty.in "+ key);
+                        console.log('facilities:', "list's Array is empty.in " + key);
                         val.list[i] = [this];
                     }
                 });
@@ -213,22 +235,22 @@ Factorio.helper = {
             var len = val.list[0].length;
             val.items = [];
             $.each(val.list, function() {
-                var items = $.map(this, function(v,i) {
+                var items = $.map(this, function(v, i) {
                     var item = Factorio.recipes[v];
                     if (item) {
                         return item;
                     }
-                    console.log('facilities:', "item '", v, "' is not found.in "+ key);
+                    console.log('facilities:', "item '", v, "' is not found.in " + key);
                     return null;
                 });
                 if (items.length != len) {
-                    console.log('facilities:', "illigal list.in "+ key);
+                    console.log('facilities:', "illigal list.in " + key);
                     flg = false;
                 }
                 val.items.push(items);
             });
             if (!flg) {
-                console.error('facilities:', "delete facility."+ key);
+                console.error('facilities:', "delete facility." + key);
                 delete Factorio.facilities[this];
             }
         });
