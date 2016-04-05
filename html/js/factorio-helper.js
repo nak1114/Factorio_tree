@@ -61,32 +61,70 @@ Factorio.helper = {
             Factorio.tree.clear();
         });
     },
+    _getFacID_multi : function() {
+        var v = this;
+        var val = this.sel.find(":selected").attr('value');
+        return val;
+    },
+    _getEffi : function(num) {
+        var v = this;
+        var sel = v.getID();
+        var item = v.list[sel][num];
+        var val = Factorio.recipes[item].production_efficiency;
+        var val = val ? val : 1.0;
+        return val;
+    },
+    _getItem : function(num) {
+        var v = this;
+        var sel = v.getID();
+        var item = v.list[sel][num];
+        return Factorio.recipes[item];
+    },
+    _getFacID_single : function() {
+        return 0;
+    },
     makeDivOption : function(root) {
         var h = Factorio.helper;
         var div = $("<div>").appendTo(root).addClass("option ui-widget");
         $("<label>").appendTo(div).text("default facirities: ");
+
+        //var cfg=["3","2","hoge","-1"];
+        var cfg = [];
+
         $.each(Factorio.facilities, function(key, val) {
             var ary = [];
-            var h = Factorio.helper;
-            $.each(val, function(i) {
-                var opt = {};
-                opt.id = this;
-                opt.text = '';
-                opt.item = Factorio.recipes[this];
-                if (i == 0) {
-                    opt.selected = 'selected';
-                }
-                ary.push(opt);
-            });
-            $('<select>').appendTo(div).addClass("option-faciriteis-" + key).select2({
-                templateResult : h.formatState_icononly,
-                templateSelection : h.formatState,
-                width : '60px',
-                placeholder : 'Select a item',
-                minimumResultsForSearch : Infinity,
-                data : ary,
-            });
+            var v = this;
+            var def = Number(cfg.shift());
+
+            v.getItem = h._getItem;
+            v.getEffi = h._getEffi;
+            if (val.list.length < 2) {
+                v.getID = h._getFacID_single;
+            } else {
+                def = (def && (0 <= def) && (def < val.list.length)) ? def : 0;
+                $.each(val.list, function(i) {
+                    var opt = {};
+                    opt.id = i;
+                    opt.text = '';
+                    opt.item = Factorio.recipes[this[0]];
+                    if (i == def) {
+                        opt.selected = 'selected';
+                    }
+                    ary.push(opt);
+                });
+                var sel = $('<select>').appendTo(div).addClass("option-faciriteis-" + key).select2({
+                    templateResult : h.formatState_icononly,
+                    templateSelection : h.formatState,
+                    width : '60px',
+                    placeholder : 'Select a item',
+                    minimumResultsForSearch : Infinity,
+                    data : ary,
+                });
+                v.sel = sel;
+                v.getID = h._getFacID_multi;
+            }
         });
+
         $("<label>").appendTo(div).text("default marge item(s): ");
         $("<select multiple='multiple'>").appendTo(div).addClass("option-filter").select2({
             templateResult : h.formatState,
@@ -99,8 +137,21 @@ Factorio.helper = {
             var val = root.find(".option-filter :selected").map(function() {
                 return this.value;
             });
-            console.log(val);
+            var val = root.find(".query-item :selected").attr('value');
+            var count = h.getCount(root.find(".query-count").spinner('value'), val);
+            return count;
         });
+    },
+    getCount : function(req_spd, id) {
+        var h = Factorio.tree;
+        var tgt = Factorio.recipes[id];
+        var fac = tgt.factory;
+        var effi = Factorio.facilities[fac[0]].getEffi(fac[1]);
+        var speed = tgt.quantity / tgt.time * effi;
+        //[u/s]
+        var count = req_spd / speed;
+        console.log("getCount", effi, speed, count);
+
     },
     makeDivTable : function(root) {
         var h = Factorio.helper;
@@ -118,13 +169,13 @@ Factorio.helper = {
             root.find('.Label_' + k).text(v);
         });
     },
-    init : function(id, json, func) {
+    init : function(root, json, func) {
         $.getJSON(json, {}, function(data) {
             Factorio.facilities = data.facilities;
             Factorio.recipes = data.recipes;
             Factorio.helper.varidate();
 
-            var root = $("#test").text("").addClass("Factorio_tree");
+            root.text("").addClass("Factorio_tree");
             Factorio.helper.makeDivTitle(root, data.title);
             Factorio.helper.makeDivQuery(root);
             Factorio.helper.makeDivOption(root);
@@ -135,12 +186,60 @@ Factorio.helper = {
         });
     },
     varidate : function() {
+        var keys = Object.keys(Factorio.facilities);
+
+        $.each(keys, function() {
+            var key = this;
+            var val = Factorio.facilities[key];
+            var flg = true;
+
+            if (val.list === undefined) {
+                console.log('facilities:', 'undefined list.in '+ key);
+                val.list = [[key]];
+            } else if (!$.isArray(val.list)) {
+                console.log('facilities:', 'list is not Array<Array>.in '+ key);
+                val.list = [[val.list]];
+            } else if (val.list.length == 0) {
+                console.log('facilities:', 'list is empty.in '+ key);
+                val.list = [[key]];
+            } else {
+                $.each(val.list, function(i) {
+                    if (!$.isArray(this)) {
+                        console.log('facilities:', "list's Array is empty.in "+ key);
+                        val.list[i] = [this];
+                    }
+                });
+            }
+            var len = val.list[0].length;
+            val.items = [];
+            $.each(val.list, function() {
+                var items = $.map(this, function(v,i) {
+                    var item = Factorio.recipes[v];
+                    if (item) {
+                        return item;
+                    }
+                    console.log('facilities:', "item '", v, "' is not found.in "+ key);
+                    return null;
+                });
+                if (items.length != len) {
+                    console.log('facilities:', "illigal list.in "+ key);
+                    flg = false;
+                }
+                val.items.push(items);
+            });
+            if (!flg) {
+                console.error('facilities:', "delete facility."+ key);
+                delete Factorio.facilities[this];
+            }
+        });
         $.each(Factorio.recipes, function(key, val) {
             if (val.name === undefined) {
                 console.log('undefined name', key);
+                val.name = key;
             }
             if (val.icon === undefined) {
                 console.log('undefined icon', key);
+                val.icon = 'icons/question.png';
             }
             if (val.production_efficiency !== undefined) {//for factory
                 if ($.type(val.production_efficiency) !== 'number') {
@@ -148,31 +247,48 @@ Factorio.helper = {
                 }
             }
             if (val.factory !== undefined) {//for craft
+                if ($.type(val.factory) !== 'array') {
+                    console.log('illigal factory', val.name);
+                    val.factory = [Object.keys(Factorio.facilities)[0], 0];
+                }
+                if (Factorio.facilities[val.factory[0]] === undefined) {
+                    console.log('undeined facility ', val.factory, 'in', val.name);
+                    val.factory = [Object.keys(Factorio.facilities)[0], 0];
+                }
+                if (Factorio.facilities[val.factory[0]].list[0][val.factory[1]] === undefined) {
+                    console.log('undeined facility num', val.factory, 'in', val.name);
+                    val.factory[1] = 0;
+                }
+                if (val.query === undefined) {
+                    console.log('undefined query', val.name);
+                    val.query = val.name;
+                }
                 if ($.type(val.time) !== 'number') {
                     console.log('illigal time', val.name);
+                    val.time = 1.0;
                 }
                 if (!$.isNumeric(val.quantity)) {
                     console.log('illigal quantity', val.name);
-                }
-                if ($.type(val.factory) !== 'array') {
-                    console.log('illigal factory', val.name);
+                    val.quantity = 1.0;
                 }
                 if (!$.isArray(val.ingredients)) {
-                    console.log('illigal ingredients', val.name);
+                    console.log('illigal ingredients ', val.ingredients, ' in ', val.name);
+                    val.ingredients = [];
+                } else {
+                    var filtered = $.grep(val.ingredients, function(elem, index) {
+                        var ret = true;
+                        if (Factorio.recipes[elem[0]] === undefined) {
+                            console.log('undefined ingredient', this[0], 'in', val.name);
+                            ret = false;
+                        }
+                        if (!$.isNumeric(elem[1])) {
+                            console.log('illigal ingredient count', this[1], 'in', val.name);
+                            ret = false;
+                        }
+                        return ret;
+                    });
+                    val.ingredients = filtered;
                 }
-                $.each(val.factory, function() {
-                    if (Factorio.recipes[this] === undefined) {
-                        console.log('undefined factory', this, 'in', val.name);
-                    }
-                });
-                $.each(val.ingredients, function() {
-                    if (Factorio.recipes[this[0]] === undefined) {
-                        console.log('undefined ingredient', this[0], 'in', val.name);
-                    }
-                    if (!$.isNumeric(this[1])) {
-                        console.log('illigal ingredient count', this[1], 'in', val.name);
-                    }
-                });
             }
         });
     },

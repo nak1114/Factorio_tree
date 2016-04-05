@@ -12,17 +12,29 @@ TypeList={
 AsmList={
 	:resource => ["hand_mining"],
 	:crafting => ["assembling_machine_1","assembling_machine_2","assembling_machine_3"]
-}
+}#cargo fluid solid
+FluidList=[
+  "sulfuric_acid",
+  "heavy_oil",
+  "light_oil",
+  "petroleum_gas",
+  "lubricant","water"
+]
 FactryList={
-"burner_mining_drill"  =>	%!    "production_efficiency" : 1.0 !,
-"electric_mining_drill"=>	%!    "production_efficiency" : 0.5 !,
-"assembling_machine_1" =>	%!    "production_efficiency" : 0.5 !,
-"assembling_machine_2" =>	%!    "production_efficiency" : 0.75 !,
-"assembling_machine_3" =>	%!    "production_efficiency" : 1.25 !,
-"stone_furnace"        =>	%!    "production_efficiency" : 0.5 !,
-"steel_furnace"        =>	%!    "production_efficiency" : 1.0 !,
-"electric_furnace"     =>	%!    "production_efficiency" : 1.0 !,
-"chemical_plant"       =>	%!    "production_efficiency" : 1.0 !,
+"burner_mining_drill"  => %!    "production_efficiency" : 1.0 !,
+"electric_mining_drill"=> %!    "production_efficiency" : 0.5 !,
+"assembling_machine_1" => %!    "production_efficiency" : 0.5 !,
+"assembling_machine_2" => %!    "production_efficiency" : 0.75 !,
+"assembling_machine_3" => %!    "production_efficiency" : 1.25 !,
+"stone_furnace"        => %!    "production_efficiency" : 0.5 !,
+"steel_furnace"        => %!    "production_efficiency" : 1.0 !,
+"electric_furnace"     => %!    "production_efficiency" : 1.0 !,
+"chemical_plant"       => %!    "production_efficiency" : 1.0 !,
+"offshore_pump"        => %!    "production_efficiency" : 1.0 !,
+"pumpjack"             => %!    "production_efficiency" : 1.0 !,
+"steel_axe"            => %!    "production_efficiency" : 1.5 !,
+"iron_axe"             => %!    "production_efficiency" : 2.0 !,
+"rocket_silo"          => %!    "production_efficiency" : 1.0 !,
 "basic_transport_belt"             => %!    "transport_capacity" : 1.875 !,
 "fast_transport_belt"              => %!    "transport_capacity" : 3.75  !,
 "express_transport_belt"           => %!    "transport_capacity" : 5.625 !,
@@ -53,9 +65,27 @@ header = <<EOS
 {
 "title" : "core-0.12.1 , 日本語",
 "label" : {
-	"product_name" : "生産物名称",
-	"require_product_speed" : "要求生産速度[units/sec]",
-	"production_facility" : "生産施設"
+  "product_name" : "生産物名称",
+  "require_product_speed" : "要求生産速度[units/sec]",
+  "production_facility" : "生産施設"
+},
+"facilities" : {
+  "crafting"   : {"list" : [["assembling_machine_1", "assembling_machine_2"],
+                            ["assembling_machine_2", "assembling_machine_2"],
+                            ["assembling_machine_3", "assembling_machine_3"]]},
+  "mining"     : {"list" : [["electric_mining_drill" ,"steel_axe"  ],
+                            ["burner_mining_drill"   ,"steel_axe"  ],
+                            ["hand_mining"           ,"hand_mining"],
+                            ["iron_axe"              ,"iron_axe"   ],
+                            ["steel_axe"             ,"steel_axe"  ]]},
+  "smelting"   : {"list" : [["electric_furnace"], 
+                            ["stone_furnace"   ], 
+                            ["steel_furnace"   ]]},
+  "rocket"     :  {"list" : [["rocket_silo"]]},
+  "oil_refining" :  {"list" : [["oil_refinery"]]},
+  "pump_oil"   : {"list" : [["pumpjack"]]},
+  "pomp_water" : {"list" : [["offshore_pump"]]},
+  "chemistry"  : {"list" : [["chemical_plant"]]}
 },
 "recipes" : {
   "hand_mining" : {
@@ -69,9 +99,27 @@ header_en = <<EOS
 {
 "title" : "core-0.12.1 , English",
 "label" : {
-	"product_name" : "Product Name",
-	"require_product_speed" : "Require product speed[units/sec]",
-	"production_facility" : "Production facility"
+  "product_name" : "Product Name",
+  "require_product_speed" : "Require product speed[units/sec]",
+  "production_facility" : "Production facility"
+},
+"facilities" : {
+  "crafting"   : {"list" : [["assembling_machine_1", "assembling_machine_2"],
+                            ["assembling_machine_2", "assembling_machine_2"],
+                            ["assembling_machine_3", "assembling_machine_3"]]},
+  "mining"     : {"list" : [["electric_mining_drill" ,"steel_axe"  ],
+                            ["burner_mining_drill"   ,"steel_axe"  ],
+                            ["hand_mining"           ,"hand_mining"],
+                            ["iron_axe"              ,"iron_axe"   ],
+                            ["steel_axe"             ,"steel_axe"  ]]},
+  "smelting"   : {"list" : [["electric_furnace"], 
+                            ["stone_furnace"   ], 
+                            ["steel_furnace"   ]]},
+  "rocket"     :  {"list" : [["rocket_silo"]]},
+  "oil_refining" :  {"list" : [["oil_refinery"]]},
+  "pump_oil"   : {"list" : [["pumpjack"]]},
+  "pomp_water" : {"list" : [["offshore_pump"]]},
+  "chemistry"  : {"list" : [["chemical_plant"]]}
 },
 "recipes" : {
   "hand_mining" : {
@@ -103,6 +151,8 @@ DATA.read.each_line do |v|
 	time   =s[6].to_f
 	recipe =s[2].gsub('-','_').scan(/(\w+)\.png(?:\*(\d+))?/).map{|v| [v[0],(v[1]||1).to_i]}
 	factory=s[4].gsub('-','_').scan(/(\w+)\.png/).map{|v| v[0]}
+	facility=nil
+	cargo=:solid
 
 	if is_en
 		name   =s[1][/\((.*)\)/,1] 
@@ -123,6 +173,34 @@ DATA.read.each_line do |v|
 	elsif factory.include?("chemical_plant") then
 		category=:chemistry
 	end
+	
+	if factory.include?("assembling_machine_1") then
+		facility=["crafting",0]
+	elsif factory.include?("assembling_machine_2") then
+		facility=["crafting",1]
+	elsif factory.include?("electric_mining_drill") then
+		facility=["mining",0]
+	elsif factory.include?("hand_mining") then
+		facility=["mining",1]
+	elsif factory.include?("electric_furnace") then
+		facility=["smelting",0]
+	elsif factory.include?("pumpjack") then
+		facility=["pump_oil",0]
+	elsif factory.include?("offshore_pump") then
+		facility=["pomp_water",0]
+	elsif factory.include?("chemical_plant") then
+		facility=["chemistry",0]
+	elsif factory.include?("oil_refinery") then
+		facility=["oil_refining",0]
+	elsif factory.include?("rocket_silo") then
+		facility=["rocket",0]
+	else
+	  puts '***Error***' + id + factory.to_s
+	end
+	if FluidList.include? id then
+		cargo=:fluid
+	end
+
 	id = TransID[id] || id
   puts %!  \},! if count_items!=0
 	puts %!  "#{id}": \{!
@@ -131,13 +209,14 @@ DATA.read.each_line do |v|
 	puts %!    "query": "#{query}",!
 	puts %!    "quantity": #{count},!
 	puts %!    "time": #{time},!
+	puts %!    "cargo": "#{cargo}",!
 	puts %!    "category": "#{category}",!
 	puts %!    "ingredients": #{recipe},!
 	if FactryList[id] then
-		puts %!    "factory": #{factory},!
+		puts %!    "factory": #{facility},!
 		puts FactryList[id]
 	else
-		puts %!    "factory": #{factory}!
+		puts %!    "factory": #{facility}!
 	end
 	count_items=count_items+1
 end

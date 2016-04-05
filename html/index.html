@@ -24,37 +24,39 @@
 		<title>Factorio Tree</title>
 
 		<style type="text/css">
-			.name-icon {
+			.Factorio_tree .name-icon {
 				width: 32px;
 				height: 32px;
 			}
-			.select2-img-icon {
+			.Factorio_tree .select2-img-icon {
 				width: 32px;
 				height: 32px;
 				vertical-align: middle;
 			}
-			#test .select2-selection--single {
+			.Factorio_tree .select2-selection--single {
 				height: 34px;
 			}
-			#test .select2-selection--single .select2-selection__arrow {
+			.Factorio_tree .select2-selection--single .select2-selection__arrow {
 				height: 30px;
 			}
-			#test .select2-container--default .select2-selection--multiple .select2-selection__choice {
-			margin-top: 0px;
+			.Factorio_tree .select2-container--default .select2-selection--multiple .select2-selection__choice {
+				margin-top: 0px;
 			}
 		</style>
 		<script>
             $(function() {
-                var def ={recipes:"recipes/core/0.12.1/en.json"};
-                var para =$.extend(def, $.getParameter());
+                var def = {
+                    recipes : "recipes/core/0.12.1/en.json"
+                };
+                var para = $.extend(def, $.getParameter());
                 var h = Factorio.helper;
                 console.log(para);
 
-                h.init("#main_table", para.recipes, function() {
+                h.init($("#test"), para.recipes, function() {
                 });
             });
             $(function() {
-                //				console.log(Factorio.helper.targets);
+                //console.log(Object.keys(test));
             });
 		</script>
 	</head>

@@ -19,25 +19,24 @@ Factorio.tree = {
         h.table = undefined;
         h.cur = undefined;
     },
-    name_with_icon : function(id) {
-        var tgt = Factorio.recipes[id];
-        var str = $("<img />").attr('src', tgt.icon).attr('alt', id).addClass("name-icon").prop('outerHTML');
+    name_with_icon : function(tgt) {
+        var str = $("<img />").attr('src', tgt.icon).attr('alt', tgt.name).addClass("name-icon").prop('outerHTML');
         return str + tgt.name;
     },
-    icon : function(id) {
-        var tgt = Factorio.recipes[id];
-        var str = $("<img />").attr('src', tgt.icon).attr('alt', id).addClass("name-icon").prop('outerHTML');
+    icon : function(tgt) {
+        var str = $("<img />").attr('src', tgt.icon).attr('alt', tgt.name).addClass("name-icon").prop('outerHTML');
         return str;
     },
     node : function(req_spd, id, parent_node) {
         var h = Factorio.tree;
         var tgt = Factorio.recipes[id];
-
-        var effi = Factorio.recipes[tgt.factory[0]].production_efficiency;
-        effi = effi ? effi : 1.0;
+        var fac = tgt.factory;
+        var effi = Factorio.facilities[fac[0]].getEffi(fac[1]);
+        var faci = Factorio.facilities[fac[0]].getItem(fac[1]);
         var speed = tgt.quantity / tgt.time * effi;
         //[u/s]
         var count = req_spd / speed;
+
         var cur = h.cur;
         h.cur++;
 
@@ -48,11 +47,11 @@ Factorio.tree = {
             rows = rows + "' data-tt-parent-id='" + parent_node;
             node = h.table.treetable("node", parent_node);
         }
-        rows = rows + "'>";
+        rows = rows + "' req_spd='"+req_spd+"' item='"+id+"' >";
 
-        rows = rows + "<td>" + h.name_with_icon(id) + "</td>";
+        rows = rows + "<td>" + h.name_with_icon(tgt) + "</td>";
         rows = rows + "<td>" + req_spd.toFixed(2) + "</td>";
-        rows = rows + "<td>" + h.icon(tgt.factory[0]) + "*" + count.toFixed(2) + "</td>";
+        rows = rows + "<td>" + h.icon(faci) + "*" + count.toFixed(2) + "</td>";
 
         rows = rows + "</tr>";
 
