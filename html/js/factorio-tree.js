@@ -77,11 +77,15 @@ Factorio.tree = {
             var tr = $(this);
             var req_spd = tr.attr('req_spd');
             var id = tr.attr('item');
+            var faci_id = tr.attr('facility-id');
+            var cargo_id = tr.attr('cargo-id');
 
             var tgt = Factorio.recipes[id];
+            faci_id  = $.isNumeric(faci_id )?faci_id  : Factorio.facilities[tgt.factory[0]].getID();
+            cargo_id = $.isNumeric(cargo_id)?cargo_id : Factorio.ejectors[tgt.cargo].getID();
 
             var fac = tgt.factory;
-            var faci = Factorio.facilities[fac[0]].getItem(fac[1]);
+            var faci = Factorio.facilities[fac[0]].getItem(fac[1],faci_id);
             var speed = tgt.quantity / tgt.time * faci.production_efficiency;
             //[u/s]
             var count = req_spd / speed;
@@ -89,7 +93,7 @@ Factorio.tree = {
             tr.find('td:eq(2)').html(str);
 
             var cargo = tgt.cargo;
-            var faci = Factorio.ejectors[cargo].getItem(0);
+            var faci = Factorio.ejectors[cargo].getItem(0,cargo_id);
             var speed = faci.insert_capacity;
             //[u/s]
             var count = req_spd / speed;

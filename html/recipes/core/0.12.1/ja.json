@@ -1242,7 +1242,8 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["steel_plate", 15], ["iron_gear_wheel", 10], ["stone_brick", 10], ["electronic_circuit", 10], ["pipe", 10]],
-    "factory": ["crafting", 1]
+    "factory": ["crafting", 1],
+    "production_efficiency" : 1.0 
   },
   "chemical_plant": {
     "icon": "icons/chemical-plant.png" ,

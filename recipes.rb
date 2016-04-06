@@ -36,6 +36,7 @@ FactryList={
 "steel_axe"            => %!    "production_efficiency" : 1.5 !,
 "iron_axe"             => %!    "production_efficiency" : 2.0 !,
 "rocket_silo"          => %!    "production_efficiency" : 1.0 !,
+"oil_refinery"         => %!    "production_efficiency" : 1.0 !,
 "basic_transport_belt"             => %!    "transport_capacity" : 1.875 !,
 "fast_transport_belt"              => %!    "transport_capacity" : 3.75  !,
 "express_transport_belt"           => %!    "transport_capacity" : 5.625 !,
