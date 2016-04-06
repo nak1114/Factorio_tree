@@ -289,7 +289,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["electronic_circuit", 2], ["plastic_bar", 2], ["copper_cable", 4]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "processing_unit": {
     "icon": "icons/processing-unit.png" ,
@@ -355,7 +355,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["electric_engine_unit", 1], ["battery", 2], ["steel_plate", 1], ["electronic_circuit", 3]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "science_pack_1": {
     "icon": "icons/science-pack-1.png" ,
@@ -388,7 +388,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["battery", 1], ["advanced_circuit", 1], ["smart_inserter", 1], ["steel_plate", 1]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "alien_science_pack": {
     "icon": "icons/alien-science-pack.png" ,
@@ -421,7 +421,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["steel_plate", 10], ["copper_plate", 5], ["plastic_bar", 5]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "rocket_fuel": {
     "icon": "icons/rocket-fuel.png" ,
@@ -454,7 +454,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["rocket_structure", 100], ["solar_panel", 100], ["basic_accumulator", 100], ["radar", 5], ["processing_unit", 100], ["rocket_fuel", 50]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "sulfuric_acid": {
     "icon": "icons/sulfuric-acid.png" ,
@@ -691,7 +691,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["electronic_circuit", 5], ["iron_plate", 5], ["basic_transport_belt", 4]],
-    "factory": ["crafting", 0],
+    "factory": ["crafting", 1],
     "transport_capacity" : 1.875 
   },
   "fast_splitter": {
@@ -703,7 +703,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["basic_splitter", 1], ["iron_gear_wheel", 10], ["electronic_circuit", 10]],
-    "factory": ["crafting", 0],
+    "factory": ["crafting", 1],
     "transport_capacity" : 5.625 
   },
   "express_splitter": {
@@ -751,7 +751,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["electric_engine_unit", 1], ["steel_plate", 1], ["pipe", 1]],
-    "factory": ["crafting", 0],
+    "factory": ["crafting", 1],
     "insert_capacity" : 10 
   },
   "burner_inserter": {
@@ -775,7 +775,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["electronic_circuit", 1], ["iron_gear_wheel", 1], ["iron_plate", 1]],
-    "factory": ["crafting", 0],
+    "factory": ["crafting", 1],
     "insert_capacity" : 0.84 
   },
   "long_handed_inserter": {
@@ -787,7 +787,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["iron_gear_wheel", 1], ["iron_plate", 1], ["basic_inserter", 1]],
-    "factory": ["crafting", 0],
+    "factory": ["crafting", 1],
     "insert_capacity" : 1.2 
   },
   "fast_inserter": {
@@ -799,7 +799,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["electronic_circuit", 2], ["iron_plate", 2], ["basic_inserter", 1]],
-    "factory": ["crafting", 0],
+    "factory": ["crafting", 1],
     "insert_capacity" : 2.1 
   },
   "smart_inserter": {
@@ -856,7 +856,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["steel_plate", 10], ["advanced_circuit", 5], ["copper_plate", 5]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "red_wire": {
     "icon": "icons/red-wire.png" ,
@@ -922,7 +922,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["stone", 1], ["iron_stick", 1], ["steel_plate", 1]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "curved_rail": {
     "icon": "icons/curved-rail.png" ,
@@ -933,7 +933,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["stone", 4], ["iron_stick", 4], ["steel_plate", 4]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "train_stop": {
     "icon": "icons/train-stop.png" ,
@@ -944,7 +944,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["electronic_circuit", 5], ["iron_plate", 10], ["steel_plate", 3]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "rail_signal": {
     "icon": "icons/rail-signal.png" ,
@@ -977,7 +977,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["engine_unit", 20], ["electronic_circuit", 10], ["steel_plate", 30]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "cargo_wagon": {
     "icon": "icons/cargo-wagon.png" ,
@@ -988,7 +988,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["iron_gear_wheel", 10], ["iron_plate", 20], ["steel_plate", 20]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "car": {
     "icon": "icons/car.png" ,
@@ -999,7 +999,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["engine_unit", 8], ["iron_plate", 20], ["steel_plate", 5]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "tank": {
     "icon": "icons/tank.png" ,
@@ -1010,7 +1010,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["engine_unit", 16], ["steel_plate", 50], ["iron_gear_wheel", 15], ["advanced_circuit", 5]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "logistic_robot": {
     "icon": "icons/logistic-robot.png" ,
@@ -1043,7 +1043,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["steel_plate", 45], ["iron_gear_wheel", 45], ["advanced_circuit", 45]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "iron_axe": {
     "icon": "icons/iron-axe.png" ,
@@ -1078,7 +1078,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["iron_gear_wheel", 3], ["stone_furnace", 1], ["iron_plate", 3]],
-    "factory": ["crafting", 0],
+    "factory": ["crafting", 1],
     "production_efficiency" : 1.0 
   },
   "electric_mining_drill": {
@@ -1090,7 +1090,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["electronic_circuit", 3], ["iron_gear_wheel", 5], ["iron_plate", 10]],
-    "factory": ["crafting", 0],
+    "factory": ["crafting", 1],
     "production_efficiency" : 0.5 
   },
   "pumpjack": {
@@ -1102,7 +1102,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["steel_plate", 15], ["iron_gear_wheel", 10], ["electronic_circuit", 10], ["pipe", 10]],
-    "factory": ["crafting", 0],
+    "factory": ["crafting", 1],
     "production_efficiency" : 1.0 
   },
   "offshore_pump": {
@@ -1114,7 +1114,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["electronic_circuit", 2], ["pipe", 1], ["iron_gear_wheel", 1]],
-    "factory": ["crafting", 0],
+    "factory": ["crafting", 1],
     "production_efficiency" : 1.0 
   },
   "boiler": {
@@ -1137,7 +1137,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["iron_gear_wheel", 5], ["pipe", 5], ["iron_plate", 5]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "solar_panel": {
     "icon": "icons/solar-panel.png" ,
@@ -1148,7 +1148,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["steel_plate", 5], ["electronic_circuit", 15], ["copper_plate", 5]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "basic_accumulator": {
     "icon": "icons/basic-accumulator.png" ,
@@ -1194,7 +1194,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["steel_plate", 15], ["stone_brick", 10], ["advanced_circuit", 5]],
-    "factory": ["crafting", 0],
+    "factory": ["crafting", 1],
     "production_efficiency" : 1.0 
   },
   "assembling_machine_1": {
@@ -1206,7 +1206,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["iron_plate", 9], ["iron_gear_wheel", 5], ["electronic_circuit", 3]],
-    "factory": ["crafting", 0],
+    "factory": ["crafting", 1],
     "production_efficiency" : 0.5 
   },
   "assembling_machine_2": {
@@ -1218,7 +1218,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["assembling_machine_1", 1], ["iron_plate", 9], ["iron_gear_wheel", 5], ["electronic_circuit", 3]],
-    "factory": ["crafting", 0],
+    "factory": ["crafting", 1],
     "production_efficiency" : 0.75 
   },
   "assembling_machine_3": {
@@ -1242,7 +1242,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["steel_plate", 15], ["iron_gear_wheel", 10], ["stone_brick", 10], ["electronic_circuit", 10], ["pipe", 10]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "chemical_plant": {
     "icon": "icons/chemical-plant.png" ,
@@ -1253,7 +1253,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["steel_plate", 5], ["iron_gear_wheel", 5], ["electronic_circuit", 5], ["pipe", 5]],
-    "factory": ["crafting", 0],
+    "factory": ["crafting", 1],
     "production_efficiency" : 1.0 
   },
   "speed_module": {
@@ -1276,7 +1276,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["speed_module", 4], ["advanced_circuit", 5], ["processing_unit", 5]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "speed_module_3": {
     "icon": "icons/speed-module-3.png" ,
@@ -1287,7 +1287,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["speed_module_2", 4], ["alien_artifact", 1], ["advanced_circuit", 5], ["processing_unit", 5]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "effectivity_module": {
     "icon": "icons/effectivity-module.png" ,
@@ -1309,7 +1309,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["effectivity_module", 4], ["advanced_circuit", 5], ["processing_unit", 5]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "effectivity_module_3": {
     "icon": "icons/effectivity-module-3.png" ,
@@ -1320,7 +1320,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["effectivity_module_2", 4], ["alien_artifact", 1], ["advanced_circuit", 5], ["processing_unit", 5]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "productivity_module": {
     "icon": "icons/productivity-module.png" ,
@@ -1342,7 +1342,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["productivity_module", 4], ["advanced_circuit", 5], ["processing_unit", 5]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "productivity_module_3": {
     "icon": "icons/productivity-module-3.png" ,
@@ -1353,7 +1353,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["productivity_module_2", 4], ["alien_artifact", 1], ["advanced_circuit", 5], ["processing_unit", 5]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "repair_pack": {
     "icon": "icons/repair-pack.png" ,
@@ -1397,7 +1397,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["iron_plate", 1], ["iron_stick", 3], ["electronic_circuit", 1]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "lab": {
     "icon": "icons/lab.png" ,
@@ -1408,7 +1408,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["basic_transport_belt", 4], ["iron_gear_wheel", 10], ["electronic_circuit", 10]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "basic_beacon": {
     "icon": "icons/basic-beacon.png" ,
@@ -1419,7 +1419,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["steel_plate", 10], ["electronic_circuit", 20], ["advanced_circuit", 20], ["copper_cable", 10]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "pistol": {
     "icon": "icons/pistol.png" ,
@@ -1441,7 +1441,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["iron_gear_wheel", 10], ["copper_plate", 5], ["iron_plate", 10]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "shotgun": {
     "icon": "icons/shotgun.png" ,
@@ -1452,7 +1452,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["iron_plate", 15], ["iron_gear_wheel", 5], ["copper_plate", 10], ["wood", 5]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "combat_shotgun": {
     "icon": "icons/combat-shotgun.png" ,
@@ -1463,7 +1463,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["steel_plate", 15], ["iron_gear_wheel", 5], ["copper_plate", 10], ["wood", 10]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "rocket_launcher": {
     "icon": "icons/rocket-launcher.png" ,
@@ -1474,7 +1474,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["iron_plate", 5], ["iron_gear_wheel", 5], ["electronic_circuit", 5]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "flame_thrower": {
     "icon": "icons/flame-thrower.png" ,
@@ -1540,7 +1540,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["electronic_circuit", 1], ["explosives", 2], ["iron_plate", 2]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "explosive_rocket": {
     "icon": "icons/explosive-rocket.png" ,
@@ -1562,7 +1562,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["steel_plate", 4], ["plastic_bar", 2], ["explosives", 1]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "explosive_cannon_shell": {
     "icon": "icons/explosive-cannon-shell.png" ,
@@ -1573,7 +1573,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["steel_plate", 4], ["plastic_bar", 2], ["explosives", 4]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "flame_thrower_ammo": {
     "icon": "icons/flame-thrower-ammo.png" ,
@@ -1606,7 +1606,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["steel_plate", 3], ["electronic_circuit", 3], ["coal", 10]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "slowdown_capsule": {
     "icon": "icons/slowdown-capsule.png" ,
@@ -1617,7 +1617,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["steel_plate", 2], ["electronic_circuit", 2], ["coal", 5]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "defender_capsule": {
     "icon": "icons/defender-capsule.png" ,
@@ -1628,7 +1628,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["piercing_bullet_magazine", 1], ["electronic_circuit", 2], ["iron_gear_wheel", 3]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "distractor_capsule": {
     "icon": "icons/distractor-capsule.png" ,
@@ -1683,7 +1683,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["advanced_circuit", 30], ["processing_unit", 5], ["steel_plate", 50]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "power_armor": {
     "icon": "icons/power-armor.png" ,
@@ -1694,7 +1694,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["processing_unit", 40], ["electric_engine_unit", 20], ["steel_plate", 40], ["alien_artifact", 10]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "power_armor_mk2": {
     "icon": "icons/power-armor-mk2.png" ,
@@ -1705,7 +1705,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["effectivity_module_3", 5], ["speed_module_3", 5], ["processing_unit", 40], ["steel_plate", 40], ["alien_artifact", 50]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "solar_panel_equipment": {
     "icon": "icons/solar-panel-equipment.png" ,
@@ -1716,7 +1716,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["solar_panel", 5], ["processing_unit", 1], ["steel_plate", 5]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "fusion_reactor_equipment": {
     "icon": "icons/fusion-reactor-equipment.png" ,
@@ -1782,7 +1782,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["processing_unit", 1], ["steel_plate", 5], ["laser_turret", 5]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "basic_exoskeleton_equipment": {
     "icon": "icons/basic-exoskeleton-equipment.png" ,
@@ -1793,7 +1793,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["processing_unit", 10], ["electric_engine_unit", 30], ["steel_plate", 20]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "night_vision_equipment": {
     "icon": "icons/night-vision-equipment.png" ,
@@ -1815,7 +1815,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["processing_unit", 5], ["steel_plate", 20], ["laser_turret", 10]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "personal_roboport_equipment": {
     "icon": "icons/personal-roboport-equipment.png" ,
@@ -1826,7 +1826,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["processing_unit", 10], ["iron_gear_wheel", 40], ["steel_plate", 20], ["battery", 45]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "gun_turret": {
     "icon": "icons/gun-turret.png" ,
@@ -1837,7 +1837,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["iron_gear_wheel", 10], ["copper_plate", 10], ["iron_plate", 20]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "laser_turret": {
     "icon": "icons/laser-turret.png" ,
@@ -1848,7 +1848,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["steel_plate", 20], ["electronic_circuit", 20], ["battery", 12]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "land_mine": {
     "icon": "icons/land-mine.png" ,
@@ -1881,7 +1881,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["wall", 1], ["steel_plate", 2], ["electronic_circuit", 2]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "radar": {
     "icon": "icons/radar.png" ,
@@ -1892,7 +1892,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["electronic_circuit", 5], ["iron_gear_wheel", 5], ["iron_plate", 10]],
-    "factory": ["crafting", 0]
+    "factory": ["crafting", 1]
   },
   "basic_electric_discharge_defense_equipment_ability": {
     "icon": "icons/basic-electric-discharge-defense-equipment-ability.png" ,
@@ -1914,7 +1914,7 @@
     "cargo": "solid",
     "category": "crafting",
     "ingredients": [["steel_plate", 1000], ["concrete", 1000], ["pipe", 100], ["processing_unit", 200], ["electric_engine_unit", 200]],
-    "factory": ["crafting", 0],
+    "factory": ["crafting", 1],
     "production_efficiency" : 1.0 
   },
   "rocket_part": {

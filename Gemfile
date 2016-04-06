@@ -5,4 +5,6 @@ group :development, :test do
   gem 'rake'
   gem 'rspec'
   gem 'selenium-webdriver'
+  gem 'ruby-debug-ide'
+  gem 'debase'
 end

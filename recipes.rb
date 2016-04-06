@@ -8,6 +8,7 @@ TypeList={
 	"流体"=> :crafting,
 	'資源'=> :resource,
 	'中間生産物'=> :crafting,
+	'インサータ'=> :crafting,
 }
 AsmList={
 	:resource => ["hand_mining"],
@@ -146,11 +147,25 @@ header_en = <<EOS
     "production_efficiency" : 1.0
   },
 EOS
+
+
+contents = <<EOS
+
+中間生産物  Edit
+
+インサータ  Edit
+
+アイコン	名称	レシピ	生成数	設備	備考	Time
+burner-inserter.png	燃料式インサータ(Burner inserter)	iron-plate.png*1, iron-gear-wheel.png*1	1			0.5
+basic-inserter.png	インサータ(Inserter)	electronic-circuit.png*1, iron-gear-wheel.png*1, iron-plate.png*1	1			0.5
+EOS
+
 	is_en=(ARGV[0]=='en')
 
 header = header_en if is_en
 
 	puts header
+#contents.each_line do |v|
 DATA.read.each_line do |v|
 	if v.chomp.match(/^(.+)\s\sEdit$/)
 		category_global=TypeList[Regexp.last_match(1)]||category_global
@@ -179,10 +194,11 @@ DATA.read.each_line do |v|
 
 	count=1.0 if count==0
 	time =1.0 if time==0
-	if factory.size==0 then
+  if factory.size==0 then
 		factory=AsmList[category]
+	
 		if category== :crafting then
-			factory-=[:assembling_machine_1] if recipe.size > 2
+			factory-=["assembling_machine_1"] if recipe.size > 2
 		end
 	end
 	
