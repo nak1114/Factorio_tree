@@ -35,6 +35,7 @@
 				vertical-align: middle;
 			}
 			.Factorio_tree .select2-selection--single {
+				font-weight: normal;
 				height: 34px;
 			}
 			.Factorio_tree .select2-selection--single .select2-selection__arrow {
@@ -47,7 +48,7 @@
 		<script>
             $(function() {
                 var def = {
-                    recipes : "recipes/core/0.12.1/en.json"
+                    recipes : "recipes/base/0.12.1/en.json"
                 };
                 var cookies=Cookies.getJSON('factorio');
                 var para = $.extend({},def,cookies, $.getParameter());
@@ -65,12 +66,12 @@
 	<body>
 		<h1>Factorio Tree</h1>
 		<div id='test'>
-			can't read JSON file.
+			Now loading...
 		</div>
 		<div>
-			<a href="index.html?recipes=recipes/core/0.12.1/en.json">English</a>
+			<a href="index.html?recipes=recipes/base/0.12.1/en.json">English</a>
 			/
-			<a href="index.html?recipes=recipes/core/0.12.1/ja.json">Japanese</a>
+			<a href="index.html?recipes=recipes/base/0.12.1/ja.json">Japanese</a>
 		</div>
 	</body>
 </html>

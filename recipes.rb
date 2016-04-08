@@ -8,6 +8,7 @@ TypeList={
 	"流体"=> :crafting,
 	'資源'=> :resource,
 	'中間生産物'=> :crafting,
+	'インサータ'=> :crafting,
 }
 AsmList={
 	:resource => ["hand_mining"],
@@ -35,6 +36,7 @@ FactryList={
 "steel_axe"            => %!    "production_efficiency" : 1.5 !,
 "iron_axe"             => %!    "production_efficiency" : 2.0 !,
 "rocket_silo"          => %!    "production_efficiency" : 1.0 !,
+"oil_refinery"         => %!    "production_efficiency" : 1.0 !,
 "basic_transport_belt"             => %!    "transport_capacity" : 1.875 !,
 "fast_transport_belt"              => %!    "transport_capacity" : 3.75  !,
 "express_transport_belt"           => %!    "transport_capacity" : 5.625 !,
@@ -63,7 +65,8 @@ count_items=0
 
 header = <<EOS
 {
-"title" : "core-0.12.1 , 日本語",
+"title" : "base-0.12.1 , 日本語",
+"recipe_format_version" : 0.1,
 "label" : {
   "product_name" : "生産物名称",
   "require_product_speed" : "要求生産速度[units/sec]",
@@ -71,29 +74,19 @@ header = <<EOS
   "product_ejector" : "排出装置"
 },
 "facilities" : {
-  "crafting"   : {"list" : [["assembling_machine_1", "assembling_machine_2"],
-                            ["assembling_machine_2", "assembling_machine_2"],
-                            ["assembling_machine_3", "assembling_machine_3"]]},
-  "mining"     : {"list" : [["electric_mining_drill" ,"steel_axe"  ],
-                            ["burner_mining_drill"   ,"steel_axe"  ],
-                            ["hand_mining"           ,"hand_mining"],
-                            ["iron_axe"              ,"iron_axe"   ],
-                            ["steel_axe"             ,"steel_axe"  ]]},
-  "smelting"   : {"list" : [["electric_furnace"], 
-                            ["stone_furnace"   ], 
-                            ["steel_furnace"   ]]},
-  "rocket"     :  {"list" : [["rocket_silo"]]},
-  "oil_refining" :  {"list" : [["oil_refinery"]]},
+  "crafting"   : {"list" : [["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"],
+                            ["assembling_machine_2", "assembling_machine_2", "assembling_machine_3"]]},
+  "mining"     : {"list" : [["electric_mining_drill","burner_mining_drill","hand_mining","iron_axe","steel_axe"],
+                            ["hand_mining"          ,"hand_mining"        ,"hand_mining","iron_axe","steel_axe"]]},
+  "smelting"   : {"list" : [["electric_furnace","stone_furnace","steel_furnace"]]},
+  "rocket"     : {"list" : [["rocket_silo"]]},
+  "oil_refining" : {"list" : [["oil_refinery"]]},
   "pump_oil"   : {"list" : [["pumpjack"]]},
   "pomp_water" : {"list" : [["offshore_pump"]]},
   "chemistry"  : {"list" : [["chemical_plant"]]}
 },
 "ejectors" : {
-  "solid"   : {"list" : [["basic_inserter"],
-                         ["long_handed_inserter"],
-                         ["fast_inserter"],
-                         ["smart_inserter"],
-                         ["burner_inserter"]]},
+  "solid"   : {"list" : [["basic_inserter","long_handed_inserter","fast_inserter","smart_inserter","burner_inserter"]]},
   "fluid"   : {"list" : [["pipe"]]}
 },
 "recipes" : {
@@ -106,13 +99,39 @@ EOS
 
 header_en = <<EOS
 {
-"title" : "core-0.12.1 , English",
+"title" : "base-0.12.1 , English",
+"recipe_format_version" : 0.1,
 "label" : {
   "product_name" : "Product Name",
   "require_product_speed" : "Require product speed[units/sec]",
   "production_facility" : "Production facility",
   "product_ejector" : "Ejector"
 },
+"facilities" : {
+  "crafting"   : {"list" : [["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"],
+                            ["assembling_machine_2", "assembling_machine_2", "assembling_machine_3"]]},
+  "mining"     : {"list" : [["electric_mining_drill","burner_mining_drill","hand_mining","iron_axe","steel_axe"],
+                            ["hand_mining"          ,"hand_mining"        ,"hand_mining","iron_axe","steel_axe"]]},
+  "smelting"   : {"list" : [["electric_furnace","stone_furnace","steel_furnace"]]},
+  "rocket"     : {"list" : [["rocket_silo"]]},
+  "oil_refining" : {"list" : [["oil_refinery"]]},
+  "pump_oil"   : {"list" : [["pumpjack"]]},
+  "pomp_water" : {"list" : [["offshore_pump"]]},
+  "chemistry"  : {"list" : [["chemical_plant"]]}
+},
+"ejectors" : {
+  "solid"   : {"list" : [["basic_inserter","long_handed_inserter","fast_inserter","smart_inserter","burner_inserter"]]},
+  "fluid"   : {"list" : [["pipe"]]}
+},
+"recipes" : {
+  "hand_mining" : {
+    "icon" : "icons/hand-mining.png",
+    "name" : "hand mining",
+    "production_efficiency" : 1.0
+  },
+EOS
+
+=begin
 "facilities" : {
   "crafting"   : {"list" : [["assembling_machine_1", "assembling_machine_2"],
                             ["assembling_machine_2", "assembling_machine_2"],
@@ -139,18 +158,25 @@ header_en = <<EOS
                          ["burner_inserter"]]},
   "fluid"   : {"list" : [["pipe"]]}
 },
-"recipes" : {
-  "hand_mining" : {
-    "icon" : "icons/hand-mining.png",
-    "name" : "hand mining",
-    "production_efficiency" : 1.0
-  },
+=end
+
+contents = <<EOS
+
+中間生産物  Edit
+
+インサータ  Edit
+
+アイコン	名称	レシピ	生成数	設備	備考	Time
+burner-inserter.png	燃料式インサータ(Burner inserter)	iron-plate.png*1, iron-gear-wheel.png*1	1			0.5
+basic-inserter.png	インサータ(Inserter)	electronic-circuit.png*1, iron-gear-wheel.png*1, iron-plate.png*1	1			0.5
 EOS
+
 	is_en=(ARGV[0]=='en')
 
 header = header_en if is_en
 
 	puts header
+#contents.each_line do |v|
 DATA.read.each_line do |v|
 	if v.chomp.match(/^(.+)\s\sEdit$/)
 		category_global=TypeList[Regexp.last_match(1)]||category_global
@@ -179,10 +205,11 @@ DATA.read.each_line do |v|
 
 	count=1.0 if count==0
 	time =1.0 if time==0
-	if factory.size==0 then
+  if factory.size==0 then
 		factory=AsmList[category]
+	
 		if category== :crafting then
-			factory-=[:assembling_machine_1] if recipe.size > 2
+			factory-=["assembling_machine_1"] if recipe.size > 2
 		end
 	end
 	

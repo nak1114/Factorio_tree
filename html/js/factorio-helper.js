@@ -1,50 +1,119 @@
 var Factorio = Factorio || {};
 Factorio.helper = {
-    
+
     _table_str : ( function() {
             return (function () {/*
-            <table class='table-main'>
+            <table>
             <thead>
             <tr>
             <th width="1%" class='Label_product_name'>Product Name</th>
             <th width="1%" class='Label_require_product_speed'>Require product speed[units/sec]</th>
             <th width="1%" class='Label_production_facility'>Production facility</th>
-            <th            class='Label_product_ejector'>Ejector</th>
+            <th width="1%" class='Label_product_ejector'>Ejector</th>
+            <th            class='Label_else'></th>
             <!--
-            <th>生産能力</th>
-            <th>排出能力</th>
-            <th>排出器</th>
             <th>要求挿入速度</th>
             <th>挿入能力</th>
             <th>挿入器</th>
             -->
             </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+            <tr class='Label_merge_bar merged'>
+            <td colspan='5'>Merged Item(s)</td>
+            </tr>
+            </tbody>
             </table>
-            */}).toString().replace(/(\n)/g, '').split('*')[1];
+            */}).toString().split('*')[1];
+            //.replace(/(\n)/g, '')
         }()),
+    varidateConfig : function(c) {
+        var h = Factorio.helper;
+        Factorio.config = Factorio.config || {};
+
+        Factorio.config.recipes = c.recipes;
+        if ($.type(Factorio.config.recipes) !== 'string') {
+            Factorio.config.recipes = '';
+        }
+
+        Factorio.config.item = c.item;
+        if ($.type(Factorio.config.item) !== 'string') {
+            Factorio.config.item = '';
+        }
+
+        Factorio.config.val = Number(c.val);
+        if (isNaN(Factorio.config.val)) {
+            Factorio.config.val = 1;
+        }
+
+        Factorio.config.filter = c.filter;
+        if ($.type(Factorio.config.filter) !== 'array') {
+            Factorio.config.filter = [Factorio.config.filter];
+        }
+
+        Factorio.config.facilities = c.facilities;
+        if ($.type(Factorio.config.facilities) !== 'array') {
+            Factorio.config.facilities = [Number(Factorio.config.facilities)];
+        }
+
+        return Factorio.config;
+    },
+    updateConfig : function() {
+        var h = Factorio.helper;
+        var root = Factorio.root;
+
+        var item = root.find(".query-item :selected").attr('value');
+        if ($.type(item) !== 'string') {
+            item = '';
+        }
+        Factorio.config.item = item;
+
+        var val = Number(root.find(".query-count").spinner('value'));
+        if ($.type(val) !== 'number') {
+            val = 1;
+        }
+        Factorio.config.val = val;
+
+        var filter = [];
+        root.find(".option-filter :selected").each(function() {
+            filter.push(this.value);
+        });
+        Factorio.config.filter = filter;
+
+        var facilities = [];
+        $.each(Factorio.facilities, function(key, val) {
+            if (val.sel) {
+                facilities.push(val.getID());
+            }
+        });
+        $.each(Factorio.ejectors, function(key, val) {
+            if (val.sel) {
+                facilities.push(val.getID());
+            }
+        });
+        Factorio.config.facilities = facilities;
+
+        return Factorio.config;
+    },
 
     makeDivTitle : function(root, title) {
         var h = Factorio.helper;
         var div = $("<div>").appendTo(root).addClass("title");
-        var str = 'JSON file is illigal.';
-        if (title) {
-            str = title;
-        }
+        var str = title || 'JSON file is illigal.';
         $("<label>").appendTo(div).text(str);
     },
     makeDivQuery : function(root) {
         var h = Factorio.helper;
-        var div = $("<div>").appendTo(root).addClass("query ui-widget");
-        $("<label>").appendTo(div).addClass("Label_query_target").text("target item:");
+        var c = Factorio.config;
+        var div = $("<div>").appendTo(root).addClass("query ui-widget　ui-widget-header ui-corner-all");
+        $("<label>").appendTo(div).addClass("Label_target_item").text("target item:");
         $("<select>").appendTo(div).addClass("query-item").select2({
             templateResult : h.formatState,
             templateSelection : h.formatState,
             placeholder : 'Select a item',
-            data : h.options2(),
+            data : h.options2([c.item]),
         });
-        $("<input>").appendTo(div).addClass("query-count").val('1').attr('size', '1').spinner({
+        $("<input>").appendTo(div).addClass("query-count").val(c.val).attr('size', '1').spinner({
             min : 0,
             icons : {
                 up : "ui-icon-plus",
@@ -53,139 +122,47 @@ Factorio.helper = {
         });
         $("<label>").appendTo(div).text("[units/sec]  ");
         $("<button>").appendTo(div).addClass("query-add").text('add').button().click(function() {
-            var val = root.find(".query-item :selected").attr('value');
-            if (val === undefined || val == '') {
-                return;
-            }
-            Factorio.tree.root(root.find(".query-count").spinner('value'), val);
+            var cfg = h.updateConfig();
+            Factorio.main.root(cfg.val, cfg.item);
         });
         $("<button>").appendTo(div).addClass("query-clear").text('clear').button().click(function() {
-            Factorio.tree.clear();
+            Factorio.main.clear();
         });
-    },
-    _getItem : function(num) {
-        var v = this;
-        var sel = v.getID();
-        var item = v.list[sel][num];
-        return Factorio.recipes[item];
-    },
-    _getFacID_multi : function() {
-        var v = this;
-        var val = this.sel.find(":selected").attr('value');
-        return Number(val);
-    },
-    _getFacID_single : function() {
-        return 0;
     },
     makeDivOption : function(root) {
         var h = Factorio.helper;
-        var div = $("<div>").appendTo(root).addClass("option ui-widget");
+        var c = Factorio.config;
+        var div = $("<div>").appendTo(root).addClass("option ui-widget　ui-widget-header ui-corner-all");
 
-        var cfg = Factorio.config.facilities;
-        if (!$.isArray(cfg)) {
-            cfg = [];
-        }
-
-        $("<label>").appendTo(div).text("default facirities: ");
+        $("<label>").appendTo(div).addClass("Label_facirities").text("facirities: ");
         $.each(Factorio.facilities, function(key, val) {
-            var ary = [];
             var v = this;
-            var def = Number(cfg.shift());
-
-            v.getItem = h._getItem;
-            if (val.list.length < 2) {
-                v.getID = h._getFacID_single;
-            } else {
-                def = (def && (0 <= def) && (def < val.list.length)) ? def : 0;
-                $.each(val.list, function(i) {
-                    var opt = {};
-                    opt.id = i;
-                    opt.text = '';
-                    opt.item = Factorio.recipes[this[0]];
-                    if (i == def) {
-                        opt.selected = 'selected';
-                    }
-                    ary.push(opt);
-                });
-                var sel = $('<select>').appendTo(div).addClass("option-faciriteis-" + key).select2({
-                    templateResult : h.formatState_icononly,
-                    templateSelection : h.formatState,
-                    width : '60px',
-                    placeholder : 'Select a item',
-                    minimumResultsForSearch : Infinity,
-                    data : ary,
-                }).on("change", function (e) { Factorio.tree.recalc(1); });
-                v.sel = sel;
-                v.getID = h._getFacID_multi;
+            if (v.sel) {
+                v.sel.appendTo(div).select2(v.opt);
             }
         });
 
-        $("<label>").appendTo(div).text("default ejectors: ");
+        $("<label>").appendTo(div).addClass("Label_ejectors").text("ejectors: ");
         $.each(Factorio.ejectors, function(key, val) {
-            var ary = [];
             var v = this;
-            var def = Number(cfg.shift());
-
-            v.getItem = h._getItem;
-            if (val.list.length < 2) {
-                v.getID = h._getFacID_single;
-            } else {
-                def = (def && (0 <= def) && (def < val.list.length)) ? def : 0;
-                $.each(val.list, function(i) {
-                    var opt = {};
-                    opt.id = i;
-                    opt.text = '';
-                    opt.item = Factorio.recipes[this[0]];
-                    if (i == def) {
-                        opt.selected = 'selected';
-                    }
-                    ary.push(opt);
-                });
-                var sel = $('<select>').appendTo(div).addClass("option-ejectors-" + key).select2({
-                    templateResult : h.formatState_icononly,
-                    templateSelection : h.formatState,
-                    width : '60px',
-                    placeholder : 'Select a item',
-                    minimumResultsForSearch : Infinity,
-                    data : ary,
-                }).on("change", function (e) { Factorio.tree.recalc(2); });
-                v.sel = sel;
-                v.getID = h._getFacID_multi;
+            if (v.sel) {
+                v.sel.appendTo(div).select2(v.opt);
             }
         });
 
-
-        $("<label>").appendTo(div).text("default marge item(s): ");
+        $("<label>").appendTo(div).addClass("Label_merge_items").text("merge item(s): ");
         $("<select multiple='multiple'>").appendTo(div).addClass("option-filter").select2({
             templateResult : h.formatState,
             templateSelection : h.formatState_icononly,
             placeholder : 'Select some item(s)',
-            data : h.options2(),
+            data : h.options2(c.filter),
         });
-        $("<button>").appendTo(div).addClass('option-save').text("save").click(function() {
-            console.log(this);
-            var val = root.find(".option-filter :selected").map(function() {
-                return this.value;
-            });
-            var val = root.find(".query-item :selected").attr('value');
-            return count;
-        });
-        $("<button>").appendTo(div).addClass('option-save-to-cookie').text("save to cookie").click(function() {
-            var ary=[];
-            var ary2=[];
-            var val = root.find(".option-filter :selected").each(function() {
-                ary.push(this.value);
-            });
-            $.each(Factorio.facilities, function(key, val) {
-                ary2.push(val.getID());
-            });
-            Factorio.config.filter = ary;
-            Factorio.config.facilities = ary2;
-            Cookies.set('factorio',Factorio.config);
-
+        $("<button>").appendTo(div).addClass('option-save-to-cookie').text("save to cookie").button().click(function() {
+            h.updateConfig();
+            Cookies.set('factorio', Factorio.config);
             return;
         });
-        $("<button>").appendTo(div).addClass('option-delete-cookie').text("delete cookie").click(function() {
+        $("<button>").appendTo(div).addClass('option-delete-cookie').text("delete cookie").button().click(function() {
             Cookies.remove('factorio');
             return;
         });
@@ -193,9 +170,8 @@ Factorio.helper = {
     makeDivTable : function(root) {
         var h = Factorio.helper;
         var div = $("<div>").appendTo(root).addClass("table");
-        $(h._table_str).appendTo(div);
-        Factorio.tree.init(root.find('.table-main'));
-
+        $(h._table_str).addClass("table-main").appendTo(div);
+        Factorio.main = new Factorio.tree(root.find('.table-main'), 'table-main-');
     },
 
     patchLabel : function(root, label) {
@@ -207,12 +183,21 @@ Factorio.helper = {
         });
     },
     init : function(root, para, func) {
-        Factorio.config = para;
-        $.getJSON(para.recipes, {}, function(data) {
+        Factorio.root = root;
+        root.text("Loading...");
+
+        Factorio.helper.varidateConfig(para);
+        $.getJSON(Factorio.config.recipes, {}).done(function(data) {
+            //Factorio.title = data.title;
+            //Factorio.label = data.label;
             Factorio.facilities = data.facilities;
             Factorio.ejectors = data.ejectors;
             Factorio.recipes = data.recipes;
             Factorio.helper.varidate();
+
+            var cfg = Factorio.config.facilities;
+            Factorio.helper.addFunc('facilities', cfg);
+            Factorio.helper.addFunc('ejectors', cfg);
 
             root.text("").addClass("Factorio_tree");
             Factorio.helper.makeDivTitle(root, data.title);
@@ -222,55 +207,68 @@ Factorio.helper = {
             Factorio.helper.patchLabel(root, data.label);
 
             func();
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            root.text("Can't read JSON file.Click on the ’English’　anchor at the bottom of this page .");
+            console.error("error：" + textStatus);
+            console.error(jqXHR);
+            console.error(errorThrown);
+        }).always(function() {
+            //console.log("OK!");
         });
     },
     varidate : function() {
-        var keys = Object.keys(Factorio.facilities);
+        function listlist(id, paraname) {
+            $.each(Object.keys(Factorio[id]), function() {
+                var key = this;
+                var val = Factorio[id][key];
+                var flg = true;
 
-        $.each(keys, function() {
-            var key = this;
-            var val = Factorio.facilities[key];
-            var flg = true;
-
-            if (val.list === undefined) {
-                console.log('facilities:', 'undefined list.in ' + key);
-                val.list = [[key]];
-            } else if (!$.isArray(val.list)) {
-                console.log('facilities:', 'list is not Array<Array>.in ' + key);
-                val.list = [[val.list]];
-            } else if (val.list.length == 0) {
-                console.log('facilities:', 'list is empty.in ' + key);
-                val.list = [[key]];
-            } else {
-                $.each(val.list, function(i) {
-                    if (!$.isArray(this)) {
-                        console.log('facilities:', "list's Array is empty.in " + key);
-                        val.list[i] = [this];
-                    }
-                });
-            }
-            var len = val.list[0].length;
-            val.items = [];
-            $.each(val.list, function() {
-                var items = $.map(this, function(v, i) {
-                    var item = Factorio.recipes[v];
-                    if (item) {
-                        return item;
-                    }
-                    console.log('facilities:', "item '", v, "' is not found.in " + key);
-                    return null;
-                });
-                if (items.length != len) {
-                    console.log('facilities:', "illigal list.in " + key);
-                    flg = false;
+                if (val.list === undefined) {
+                    console.log(id, ':', 'undefined list.in ' + key);
+                    val.list = [[key]];
+                } else if (!$.isArray(val.list)) {
+                    console.log(id, ':', 'list is not Array<Array>.in ' + key);
+                    val.list = [[val.list]];
+                } else if (val.list.length == 0) {
+                    console.log(id, ':', 'list is empty.in ' + key);
+                    val.list = [[key]];
+                } else {
+                    $.each(val.list, function(i) {
+                        if (!$.isArray(this)) {
+                            console.log(id, ':', "list's Array is empty.in " + key);
+                            val.list[i] = [this];
+                        }
+                    });
                 }
-                val.items.push(items);
+                var len = val.list[0].length;
+                $.each(val.list, function() {
+                    var items = $.map(this, function(v, i) {
+                        var item = Factorio.recipes[v];
+                        if (item) {
+                            if (!$.isNumeric(item[paraname])) {
+                                console.log(id, ':', "item '", v, "' isn't provide '" + paraname + "'.in " + key);
+                                item[paraname] = 1.0;
+                            }
+                            return item;
+                        }
+                        console.log(id, ':', "item '", v, "' is not found.in " + key);
+                        return null;
+                    });
+                    if (items.length != len) {
+                        console.log(id, ':', "illigal list.in " + key);
+                        flg = false;
+                    }
+                });
+                if (!flg) {
+                    console.error(id, ':', "deleted." + key);
+                    delete Factorio[this];
+                }
             });
-            if (!flg) {
-                console.error('facilities:', "delete facility." + key);
-                delete Factorio.facilities[this];
-            }
-        });
+        }
+
+        listlist('facilities', 'production_efficiency');
+        listlist('ejectors', 'insert_capacity');
+
         $.each(Factorio.recipes, function(key, val) {
             if (val.name === undefined) {
                 console.log('undefined name', key);
@@ -280,21 +278,21 @@ Factorio.helper = {
                 console.log('undefined icon', key);
                 val.icon = 'icons/question.png';
             }
-            if (val.production_efficiency !== undefined) {//for factory
-                if ($.type(val.production_efficiency) !== 'number') {
-                    console.log('illigal production_efficiency', val.name);
-                }
-            }
             if (val.factory !== undefined) {//for craft
                 if ($.type(val.factory) !== 'array') {
                     console.log('illigal factory', val.name);
                     val.factory = [Object.keys(Factorio.facilities)[0], 0];
                 }
                 if (Factorio.facilities[val.factory[0]] === undefined) {
-                    console.log('undeined facility ', val.factory, 'in', val.name);
+                    console.log('undeined facility item', val.factory, 'in', val.name);
                     val.factory = [Object.keys(Factorio.facilities)[0], 0];
                 }
-                if (Factorio.facilities[val.factory[0]].list[0][val.factory[1]] === undefined) {
+                if (isNaN(val.factory[1])) {
+                    console.log('undeined facility num', val.factory, 'in', val.name);
+                    val.factory[1] = 0;
+                }
+                val.factory[1] = Number(val.factory[1]);
+                if (Factorio.facilities[val.factory[0]].list.length <= val.factory[1]) {
                     console.log('undeined facility num', val.factory, 'in', val.name);
                     val.factory[1] = 0;
                 }
@@ -324,10 +322,62 @@ Factorio.helper = {
                             console.log('illigal ingredient count', this[1], 'in', val.name);
                             ret = false;
                         }
+                        if (Factorio.recipes[elem[0]].factory === undefined) {
+                            console.log('illigal ingredient item', this[0], 'in', val.name);
+                            ret = false;
+                        }
                         return ret;
                     });
                     val.ingredients = filtered;
                 }
+            }
+        });
+    },
+    _getItem : function(num, id) {
+        return Factorio.recipes[this.list[num][id]];
+    },
+    _getFacID_multi : function() {
+        var v = this;
+        var val = this.sel.find(":selected").attr('value');
+        return Number(val);
+    },
+    _getFacID_single : function() {
+        return 0;
+    },
+    addFunc : function(id, cfg) {
+        var h = Factorio.helper;
+        $.each(Factorio[id], function(key, val) {
+            var ary = [];
+            var v = this;
+
+            v.getItem = h._getItem;
+            if (val.list[0].length < 2) {
+                v.getID = h._getFacID_single;
+            } else {
+                var def = Number(cfg.shift());
+                def = (def && (0 <= def) && (def < val.list[0].length)) ? def : 0;
+                $.each(val.list[0], function(i) {
+                    var opt = {};
+                    opt.id = i;
+                    opt.text = '';
+                    opt.item = Factorio.recipes[this];
+                    if (i == def) {
+                        opt.selected = true;
+                    }
+                    ary.push(opt);
+                });
+                v.sel = $('<select>').addClass("option-" + id + "-" + key).on("change", function(e) {
+                    Factorio.main.recalc(2);
+                });
+                v.opt = {
+                    templateResult : h.formatState_icononly,
+                    templateSelection : h.formatState,
+                    width : '60px',
+                    placeholder : 'Select a item',
+                    minimumResultsForSearch : Infinity,
+                    data : ary,
+                };
+                v.getID = h._getFacID_multi;
             }
         });
     },
@@ -341,7 +391,7 @@ Factorio.helper = {
         });
         return str;
     },
-    options2 : function() {
+    options2 : function(sel_list) {
         var h = Factorio.recipes;
         var data = [];
         jQuery.each(h, function(key, val) {
@@ -350,6 +400,9 @@ Factorio.helper = {
                 item.id = key;
                 item.text = (val.query) ? val.query : val.name;
                 item.item = val;
+                if ($.inArray(key, sel_list) >= 0) {
+                    item.selected = true;
+                }
                 data.push(item);
             }
         });
