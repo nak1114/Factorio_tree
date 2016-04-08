@@ -65,7 +65,8 @@ count_items=0
 
 header = <<EOS
 {
-"title" : "core-0.12.1 , 日本語",
+"title" : "base-0.12.1 , 日本語",
+"recipe_format_version" : 0.1,
 "label" : {
   "product_name" : "生産物名称",
   "require_product_speed" : "要求生産速度[units/sec]",
@@ -73,29 +74,19 @@ header = <<EOS
   "product_ejector" : "排出装置"
 },
 "facilities" : {
-  "crafting"   : {"list" : [["assembling_machine_1", "assembling_machine_2"],
-                            ["assembling_machine_2", "assembling_machine_2"],
-                            ["assembling_machine_3", "assembling_machine_3"]]},
-  "mining"     : {"list" : [["electric_mining_drill" ,"steel_axe"  ],
-                            ["burner_mining_drill"   ,"steel_axe"  ],
-                            ["hand_mining"           ,"hand_mining"],
-                            ["iron_axe"              ,"iron_axe"   ],
-                            ["steel_axe"             ,"steel_axe"  ]]},
-  "smelting"   : {"list" : [["electric_furnace"], 
-                            ["stone_furnace"   ], 
-                            ["steel_furnace"   ]]},
-  "rocket"     :  {"list" : [["rocket_silo"]]},
-  "oil_refining" :  {"list" : [["oil_refinery"]]},
+  "crafting"   : {"list" : [["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"],
+                            ["assembling_machine_2", "assembling_machine_2", "assembling_machine_3"]]},
+  "mining"     : {"list" : [["electric_mining_drill","burner_mining_drill","hand_mining","iron_axe","steel_axe"],
+                            ["hand_mining"          ,"hand_mining"        ,"hand_mining","iron_axe","steel_axe"]]},
+  "smelting"   : {"list" : [["electric_furnace","stone_furnace","steel_furnace"]]},
+  "rocket"     : {"list" : [["rocket_silo"]]},
+  "oil_refining" : {"list" : [["oil_refinery"]]},
   "pump_oil"   : {"list" : [["pumpjack"]]},
   "pomp_water" : {"list" : [["offshore_pump"]]},
   "chemistry"  : {"list" : [["chemical_plant"]]}
 },
 "ejectors" : {
-  "solid"   : {"list" : [["basic_inserter"],
-                         ["long_handed_inserter"],
-                         ["fast_inserter"],
-                         ["smart_inserter"],
-                         ["burner_inserter"]]},
+  "solid"   : {"list" : [["basic_inserter","long_handed_inserter","fast_inserter","smart_inserter","burner_inserter"]]},
   "fluid"   : {"list" : [["pipe"]]}
 },
 "recipes" : {
@@ -108,13 +99,39 @@ EOS
 
 header_en = <<EOS
 {
-"title" : "core-0.12.1 , English",
+"title" : "base-0.12.1 , English",
+"recipe_format_version" : 0.1,
 "label" : {
   "product_name" : "Product Name",
   "require_product_speed" : "Require product speed[units/sec]",
   "production_facility" : "Production facility",
   "product_ejector" : "Ejector"
 },
+"facilities" : {
+  "crafting"   : {"list" : [["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"],
+                            ["assembling_machine_2", "assembling_machine_2", "assembling_machine_3"]]},
+  "mining"     : {"list" : [["electric_mining_drill","burner_mining_drill","hand_mining","iron_axe","steel_axe"],
+                            ["hand_mining"          ,"hand_mining"        ,"hand_mining","iron_axe","steel_axe"]]},
+  "smelting"   : {"list" : [["electric_furnace","stone_furnace","steel_furnace"]]},
+  "rocket"     : {"list" : [["rocket_silo"]]},
+  "oil_refining" : {"list" : [["oil_refinery"]]},
+  "pump_oil"   : {"list" : [["pumpjack"]]},
+  "pomp_water" : {"list" : [["offshore_pump"]]},
+  "chemistry"  : {"list" : [["chemical_plant"]]}
+},
+"ejectors" : {
+  "solid"   : {"list" : [["basic_inserter","long_handed_inserter","fast_inserter","smart_inserter","burner_inserter"]]},
+  "fluid"   : {"list" : [["pipe"]]}
+},
+"recipes" : {
+  "hand_mining" : {
+    "icon" : "icons/hand-mining.png",
+    "name" : "hand mining",
+    "production_efficiency" : 1.0
+  },
+EOS
+
+=begin
 "facilities" : {
   "crafting"   : {"list" : [["assembling_machine_1", "assembling_machine_2"],
                             ["assembling_machine_2", "assembling_machine_2"],
@@ -141,14 +158,7 @@ header_en = <<EOS
                          ["burner_inserter"]]},
   "fluid"   : {"list" : [["pipe"]]}
 },
-"recipes" : {
-  "hand_mining" : {
-    "icon" : "icons/hand-mining.png",
-    "name" : "hand mining",
-    "production_efficiency" : 1.0
-  },
-EOS
-
+=end
 
 contents = <<EOS
 

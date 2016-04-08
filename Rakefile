@@ -1,4 +1,3 @@
-#require "bundler/gem_tasks"
 require 'bundler/setup'
 require "rspec/core/rake_task"
 
@@ -13,12 +12,12 @@ end
 
 desc "make recipe file"
 task :recipe do
-  sh "ruby recipes.rb jp >html/recipes/core/0.12.1/ja.json"
-  sh "ruby recipes.rb en >html/recipes/core/0.12.1/en.json"
+  sh "ruby recipes.rb jp >html/recipes/base/0.12.1/ja.json"
+  sh "ruby recipes.rb en >html/recipes/base/0.12.1/en.json"
 end
 
 desc "deploy Github pages"
-task :deplloy do
+task :deploy do
   cd 'tmp' do
      sh "git clone git https://github.com/nak1114/Factorio_tree.git"
      sh "git checkout --orphan gh-pages"
