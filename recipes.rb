@@ -71,7 +71,17 @@ header = <<EOS
   "product_name" : "生産物名称",
   "require_product_speed" : "要求生産速度[units/sec]",
   "production_facility" : "生産施設",
-  "product_ejector" : "排出装置"
+  "product_ejector" : "排出装置",
+  "target_item" : "アイテム",
+  "facirities" : "生産設備",
+  "ejectors" : "排出装置",
+  "merge_items" : "マージ"
+},
+"tooltip" : {
+  "add" : "テーブルにアイテムのレシピを追加します",
+  "clear" : "テーブル上のレシピを全て消します。",
+  "save" : "cookieに現在のオプションを保存します。再読み込み時に再現します。",
+  "erase" : "cookieに保存しているオプションを削除します。"
 },
 "facilities" : {
   "crafting"   : {"list" : [["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"],
@@ -105,7 +115,17 @@ header_en = <<EOS
   "product_name" : "Product Name",
   "require_product_speed" : "Require product speed[units/sec]",
   "production_facility" : "Production facility",
-  "product_ejector" : "Ejector"
+  "product_ejector" : "Ejector",
+  "target_item" : "target item:",
+  "facirities" : "facirities:",
+  "ejectors" : "ejectors:",
+  "merge_items" : "merge item(s):"
+},
+"tooltip" : {
+  "add" : "Add the recipe of the items on the table.",
+  "clear" : "To clear all the recipes on the table.",
+  "save" : "Saves the current options in the cookie. Restore at the time of reloading.",
+  "erase" : "Delete the options that are stored in a cookie."
 },
 "facilities" : {
   "crafting"   : {"list" : [["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"],

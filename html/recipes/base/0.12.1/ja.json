@@ -5,7 +5,17 @@
   "product_name" : "生産物名称",
   "require_product_speed" : "要求生産速度[units/sec]",
   "production_facility" : "生産施設",
-  "product_ejector" : "排出装置"
+  "product_ejector" : "排出装置",
+  "target_item" : "アイテム",
+  "facirities" : "生産設備",
+  "ejectors" : "排出装置",
+  "merge_items" : "マージ"
+},
+"tooltip" : {
+  "add" : "テーブルにアイテムのレシピを追加します",
+  "clear" : "テーブル上のレシピを全て消します。",
+  "save" : "cookieに現在のオプションを保存します。再読み込み時に再現します。",
+  "erase" : "cookieに保存しているオプションを削除します。"
 },
 "facilities" : {
   "crafting"   : {"list" : [["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"],
