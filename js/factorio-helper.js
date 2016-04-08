@@ -121,11 +121,11 @@ Factorio.helper = {
             },
         });
         $("<label>").appendTo(div).text("[units/sec]  ");
-        $("<button>").appendTo(div).addClass("query-add").text('add').button().click(function() {
+        $("<button>").appendTo(div).addClass("query-add Tip_add").text('add').button().click(function() {
             var cfg = h.updateConfig();
             Factorio.main.root(cfg.val, cfg.item);
         });
-        $("<button>").appendTo(div).addClass("query-clear").text('clear').button().click(function() {
+        $("<button>").appendTo(div).addClass("query-clear Tip_clear").text('clear').button().click(function() {
             Factorio.main.clear();
         });
     },
@@ -157,12 +157,12 @@ Factorio.helper = {
             placeholder : 'Select some item(s)',
             data : h.options2(c.filter),
         });
-        $("<button>").appendTo(div).addClass('option-save-to-cookie').text("save to cookie").button().click(function() {
+        $("<button>").appendTo(div).addClass('option-save  Tip_save').text("save").button().click(function() {
             h.updateConfig();
             Cookies.set('factorio', Factorio.config);
             return;
         });
-        $("<button>").appendTo(div).addClass('option-delete-cookie').text("delete cookie").button().click(function() {
+        $("<button>").appendTo(div).addClass('option-erase Tip_erase').text("erase").button().click(function() {
             Cookies.remove('factorio');
             return;
         });
@@ -180,6 +180,14 @@ Factorio.helper = {
         }
         $.each(label, function(k, v) {
             root.find('.Label_' + k).text(v);
+        });
+    },
+    patchTip : function(root, label) {
+        if (!label) {
+            return;
+        }
+        $.each(label, function(k, v) {
+            root.find('.Tip_' + k).attr('title',v).tooltip();
         });
     },
     init : function(root, para, func) {
@@ -205,7 +213,7 @@ Factorio.helper = {
             Factorio.helper.makeDivOption(root);
             Factorio.helper.makeDivTable(root);
             Factorio.helper.patchLabel(root, data.label);
-
+            Factorio.helper.patchTip(root, data.tooltip);
             func();
         }).fail(function(jqXHR, textStatus, errorThrown) {
             root.text("Can't read JSON file.Click on the ’English’　anchor at the bottom of this page .");
