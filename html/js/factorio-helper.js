@@ -81,7 +81,9 @@ Factorio.helper = {
         Factorio.config.unit = unit;
 
         var filter = root.find(".option-filter").val();
-        if (!$.isArray(filter)){filter = [];}
+        if (!$.isArray(filter)) {
+            filter = [];
+        }
         Factorio.config.filter = filter;
 
         var facilities = [];
@@ -137,7 +139,7 @@ Factorio.helper = {
     makeDivOption : function(root) {
         var h = Factorio.helper;
         var c = Factorio.config;
-        var div = $("<div>").appendTo(root).addClass("option ui-widget　ui-widget-header ui-corner-all");
+        var div = $("<div>").appendTo(root).addClass("option ui-widget ui-widget-header ui-corner-all");
 
         $("<label>").appendTo(div).addClass("Label_facirities").text("facirities: ");
         $.each(Factorio.facilities, function(key, val) {
@@ -174,6 +176,16 @@ Factorio.helper = {
             Cookies.remove('factorio');
             return;
         });
+        var div = $("<div>").appendTo(root).addClass("option2 ui-widget ui-widget-header ui-corner-all");
+        $("<label>").appendTo(div).addClass("Label_tree_level").text("Tree Level:");
+        $("<button>").appendTo(div).text("all").click(h.formTree);
+        $("<button>").appendTo(div).text("root").click(h.formTree);
+        $("<button>").appendTo(div).text("1").click(h.formTree);
+        $("<button>").appendTo(div).text("2").click(h.formTree);
+        $("<button>").appendTo(div).text("3").click(h.formTree);
+        $("<button>").appendTo(div).text("4").click(h.formTree);
+        $("<button>").appendTo(div).text("5").click(h.formTree);
+        div.buttonset();
     },
     makeDivTable : function(root) {
         var h = Factorio.helper;
@@ -444,5 +456,28 @@ Factorio.helper = {
         }
         var node = $('<span><img src="' + state.item.icon + '" class="select2-img-icon" /></span>');
         return node;
+    },
+    formTree : function() {
+        var text = $(this).text();
+        var t = Factorio.main.table;
+        if (text == 'all') {
+            t.treetable('expandAll');
+        } else if (text == 'root') {
+            t.treetable('collapseAll');
+        } else {
+            var thr = Number(text);
+            $.each(Factorio.main.subtable, function(k, val) {
+                $.each(val.list, function() {
+                    var node = this.node;
+                    var depth = this.depth;
+                    if (thr > depth) {
+                        t.treetable('expandNode', node);
+                    } else if (thr == depth) {
+                        t.treetable('collapseNode', node);
+                    }
+                });
+            });
+        }
+
     },
 };
