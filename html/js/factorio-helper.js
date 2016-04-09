@@ -74,6 +74,12 @@ Factorio.helper = {
         }
         Factorio.config.val = val;
 
+        var unit = Number(root.find(".query-unit :selected").attr('value'));
+        if ($.type(unit) !== 'number') {
+            unit = 1;
+        }
+        Factorio.config.unit = unit;
+
         var filter = [];
         root.find(".option-filter :selected").each(function() {
             filter.push(this.value);
@@ -105,7 +111,7 @@ Factorio.helper = {
     makeDivQuery : function(root) {
         var h = Factorio.helper;
         var c = Factorio.config;
-        var div = $("<div>").appendTo(root).addClass("query ui-widget　ui-widget-header ui-corner-all");
+        var div = $("<div>").appendTo(root).addClass("query ui-widget ui-widget-header ui-corner-all");
         $("<label>").appendTo(div).addClass("Label_target_item").text("target item:");
         $("<select>").appendTo(div).addClass("query-item").select2({
             templateResult : h.formatState,
@@ -120,10 +126,11 @@ Factorio.helper = {
                 down : "ui-icon-minus"
             },
         });
-        $("<label>").appendTo(div).text("[units/sec]  ");
+        $("<select>").appendTo(div).addClass("query-unit").html('<select><option value="1">[unit/sec]</option><option value="2">[facility]</option></select>').selectspinner();
         $("<button>").appendTo(div).addClass("query-add Tip_add").text('add').button().click(function() {
             var cfg = h.updateConfig();
-            Factorio.main.root(cfg.val, cfg.item);
+            var req_spd = h.getReqSpeed();
+            Factorio.main.root(req_spd, cfg.item);
         });
         $("<button>").appendTo(div).addClass("query-clear Tip_clear").text('clear').button().click(function() {
             Factorio.main.clear();
@@ -152,6 +159,7 @@ Factorio.helper = {
 
         $("<label>").appendTo(div).addClass("Label_merge_items").text("merge item(s): ");
         $("<select multiple='multiple'>").appendTo(div).addClass("option-filter").select2({
+            width : '320px',
             templateResult : h.formatState,
             templateSelection : h.formatState_icononly,
             placeholder : 'Select some item(s)',
@@ -159,7 +167,9 @@ Factorio.helper = {
         });
         $("<button>").appendTo(div).addClass('option-save  Tip_save').text("save").button().click(function() {
             h.updateConfig();
-            Cookies.set('factorio', Factorio.config);
+            Cookies.set('factorio', Factorio.config, {
+                expires : 100
+            });
             return;
         });
         $("<button>").appendTo(div).addClass('option-erase Tip_erase').text("erase").button().click(function() {
@@ -187,7 +197,7 @@ Factorio.helper = {
             return;
         }
         $.each(label, function(k, v) {
-            root.find('.Tip_' + k).attr('title',v).tooltip();
+            root.find('.Tip_' + k).attr('title', v).tooltip();
         });
     },
     init : function(root, para, func) {
@@ -341,16 +351,17 @@ Factorio.helper = {
             }
         });
     },
-    _getItem : function(num, id) {
-        return Factorio.recipes[this.list[num][id]];
-    },
-    _getFacID_multi : function() {
-        var v = this;
-        var val = this.sel.find(":selected").attr('value');
-        return Number(val);
-    },
-    _getFacID_single : function() {
-        return 0;
+    getReqSpeed : function() {
+        var c = Factorio.config;
+        if(c.unit==1){
+            return c.val;
+        }
+        var tgt = Factorio.recipes[c.item];
+        var faci_id = Factorio.facilities[tgt.factory[0]].getID();
+        var fac = tgt.factory;
+        var faci = Factorio.facilities[fac[0]].getItem(fac[1], faci_id);
+        var speed = tgt.quantity / tgt.time * faci.production_efficiency;
+        return c.val * speed;
     },
     addFunc : function(id, cfg) {
         var h = Factorio.helper;
@@ -358,9 +369,13 @@ Factorio.helper = {
             var ary = [];
             var v = this;
 
-            v.getItem = h._getItem;
+            v.getItem = function(num, id) {
+                return Factorio.recipes[this.list[num][id]];
+            };
             if (val.list[0].length < 2) {
-                v.getID = h._getFacID_single;
+                v.getID = function() {
+                    return 0;
+                };
             } else {
                 var def = Number(cfg.shift());
                 def = (def && (0 <= def) && (def < val.list[0].length)) ? def : 0;
@@ -385,7 +400,9 @@ Factorio.helper = {
                     minimumResultsForSearch : Infinity,
                     data : ary,
                 };
-                v.getID = h._getFacID_multi;
+                v.getID = function() {
+                    return Number(v.sel.find(":selected").attr('value'));
+                };
             }
         });
     },
