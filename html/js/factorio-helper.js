@@ -62,7 +62,7 @@ Factorio.helper = {
         var h = Factorio.helper;
         var root = Factorio.root;
 
-        var item = root.find(".query-item :selected").attr('value');
+        var item = root.find(".query-item").val();
         if ($.type(item) !== 'string') {
             item = '';
         }
@@ -74,16 +74,14 @@ Factorio.helper = {
         }
         Factorio.config.val = val;
 
-        var unit = Number(root.find(".query-unit :selected").attr('value'));
+        var unit = Number(root.find(".query-unit").val());
         if ($.type(unit) !== 'number') {
             unit = 1;
         }
         Factorio.config.unit = unit;
 
-        var filter = [];
-        root.find(".option-filter :selected").each(function() {
-            filter.push(this.value);
-        });
+        var filter = root.find(".option-filter").val();
+        if (!$.isArray(filter)){filter = [];}
         Factorio.config.filter = filter;
 
         var facilities = [];
@@ -353,7 +351,7 @@ Factorio.helper = {
     },
     getReqSpeed : function() {
         var c = Factorio.config;
-        if(c.unit==1){
+        if (c.unit == 1) {
             return c.val;
         }
         var tgt = Factorio.recipes[c.item];
@@ -401,7 +399,7 @@ Factorio.helper = {
                     data : ary,
                 };
                 v.getID = function() {
-                    return Number(v.sel.find(":selected").attr('value'));
+                    return Number(v.sel.val());
                 };
             }
         });
