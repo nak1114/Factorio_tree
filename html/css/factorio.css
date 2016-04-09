@@ -1,0 +1,19 @@
+.Factorio_tree .name-icon {
+    width: 32px;
+    height: 32px;
+}
+.Factorio_tree .select2-img-icon {
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+}
+.Factorio_tree .select2-selection--single {
+    font-weight: normal;
+    height: 34px;
+}
+.Factorio_tree .select2-selection--single .select2-selection__arrow {
+    height: 30px;
+}
+.Factorio_tree .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    margin-top: 0px;
+}

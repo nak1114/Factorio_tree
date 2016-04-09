@@ -152,51 +152,13 @@ header_en = <<EOS
 EOS
 
 =begin
-"facilities" : {
-  "crafting"   : {"list" : [["assembling_machine_1", "assembling_machine_2"],
-                            ["assembling_machine_2", "assembling_machine_2"],
-                            ["assembling_machine_3", "assembling_machine_3"]]},
-  "mining"     : {"list" : [["electric_mining_drill" ,"steel_axe"  ],
-                            ["burner_mining_drill"   ,"steel_axe"  ],
-                            ["hand_mining"           ,"hand_mining"],
-                            ["iron_axe"              ,"iron_axe"   ],
-                            ["steel_axe"             ,"steel_axe"  ]]},
-  "smelting"   : {"list" : [["electric_furnace"], 
-                            ["stone_furnace"   ], 
-                            ["steel_furnace"   ]]},
-  "rocket"     :  {"list" : [["rocket_silo"]]},
-  "oil_refining" :  {"list" : [["oil_refinery"]]},
-  "pump_oil"   : {"list" : [["pumpjack"]]},
-  "pomp_water" : {"list" : [["offshore_pump"]]},
-  "chemistry"  : {"list" : [["chemical_plant"]]}
-},
-"ejectors" : {
-  "solid"   : {"list" : [["basic_inserter"],
-                         ["long_handed_inserter"],
-                         ["fast_inserter"],
-                         ["smart_inserter"],
-                         ["burner_inserter"]]},
-  "fluid"   : {"list" : [["pipe"]]}
-},
 =end
-
-contents = <<EOS
-
-中間生産物  Edit
-
-インサータ  Edit
-
-アイコン	名称	レシピ	生成数	設備	備考	Time
-burner-inserter.png	燃料式インサータ(Burner inserter)	iron-plate.png*1, iron-gear-wheel.png*1	1			0.5
-basic-inserter.png	インサータ(Inserter)	electronic-circuit.png*1, iron-gear-wheel.png*1, iron-plate.png*1	1			0.5
-EOS
 
 	is_en=(ARGV[0]=='en')
 
 header = header_en if is_en
 
 	puts header
-#contents.each_line do |v|
 DATA.read.each_line do |v|
 	if v.chomp.match(/^(.+)\s\sEdit$/)
 		category_global=TypeList[Regexp.last_match(1)]||category_global
@@ -581,20 +543,3 @@ rocket-silo.png	ロケットサイロ(Rocket silo)	steel-plate.png*1000, concret
 アイコン	名称	レシピ	生成数	設備	備考	Time
 rocket-part.png	ロケットパーツ(Rocket part)	rocket-structure.png*10,rocket-fuel.png*10,rocket-control-unit.png*10	1	rocket-silo.png	ロケット完成にはこのパーツが100個必要	3
 
-
-"hand_mining" : {
-	"icon" : "hand-mining.png",
-  "name" : "手堀",
-	"production_efficiency" : 1.0
-},
-{
-"burner_mining_drill"  =>	%!"production_efficiency" : 1.0!,
-"basic_mining_drill"   =>	%!"production_efficiency" : 0.5!,
-"assembling_machine_1" =>	%!"production_efficiency" : 0.5!,
-"assembling_machine_2" =>	%!"production_efficiency" : 0.75!,
-"assembling_machine_3" =>	%!"production_efficiency" : 1.25!,
-"stone_furnace"        =>	%!"production_efficiency" : 0.5!,
-"steel_furnace"        =>	%!"production_efficiency" : 1.0!,
-"electric_furnace"     =>	%!"production_efficiency" : 1.0!,
-"chemical_plant"       =>	%!"production_efficiency" : 1.0!,
-}
