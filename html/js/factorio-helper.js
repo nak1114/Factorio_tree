@@ -1,6 +1,5 @@
 var Factorio = Factorio || {};
 Factorio.helper = {
-
     _table_str : ( function() {
             return (function () {/*
             <table>
@@ -24,8 +23,8 @@ Factorio.helper = {
             </tr>
             </tbody>
             </table>
-            */}).toString().split('*')[1];
-            //.replace(/(\n)/g, '')
+            */}).toString().match(/\/\*\s*\n\s*([^]*)\n\s*\*\//)[1].replace(/\n\s*/g, '');
+            //.toString().split('*')[1];
         }()),
     varidateConfig : function(c) {
         var h = Factorio.helper;
@@ -131,9 +130,11 @@ Factorio.helper = {
             var cfg = h.updateConfig();
             var req_spd = h.getReqSpeed();
             Factorio.main.root(req_spd, cfg.item);
+            Factorio.chart.root(req_spd, cfg.item);
         });
         $("<button>").appendTo(div).addClass("query-clear Tip_clear").text('clear').button().click(function() {
             Factorio.main.clear();
+            Factorio.chart.clear();
         });
     },
     makeDivOption : function(root) {
@@ -193,6 +194,11 @@ Factorio.helper = {
         $(h._table_str).addClass("table-main").appendTo(div);
         Factorio.main = new Factorio.tree(root.find('.table-main'), 'table-main-');
     },
+    makeDivChart : function(root) {
+        var h = Factorio.helper;
+        var div = $("<div>").appendTo(root).addClass("chart");
+        Factorio.chart = new Factorio.graph(root.find('.chart')[0], 'chart-');
+    },
 
     patchLabel : function(root, label) {
         if (!label) {
@@ -232,6 +238,7 @@ Factorio.helper = {
             Factorio.helper.makeDivQuery(root);
             Factorio.helper.makeDivOption(root);
             Factorio.helper.makeDivTable(root);
+            Factorio.helper.makeDivChart(root);
             Factorio.helper.patchLabel(root, data.label);
             Factorio.helper.patchTip(root, data.tooltip);
             func();
