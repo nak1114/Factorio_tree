@@ -1,57 +1,59 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link  href="lib/jqueryui/jquery-ui.css" rel="stylesheet" type="text/css" />
-        <link  href="lib/treetable/jquery.treetable.css" rel="stylesheet" type="text/css" />
-        <link  href="lib/treetable/jquery.treetable.theme.default.css" rel="stylesheet" type="text/css" />
-        <link  href="lib/select2/select2.css" rel="stylesheet" type="text/css" />
-        <link  href="lib/selectspinner/jquery.selectspinner.css" rel="stylesheet" type="text/css" />
-        <link  href="css/factorio.css" rel="stylesheet" type="text/css" />
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link  href="lib/jqueryui/jquery-ui.css" rel="stylesheet" type="text/css" />
+		<link  href="lib/treetable/jquery.treetable.css" rel="stylesheet" type="text/css" />
+		<link  href="lib/treetable/jquery.treetable.theme.default.css" rel="stylesheet" type="text/css" />
+		<link  href="lib/select2/select2.css" rel="stylesheet" type="text/css" />
+		<link  href="lib/selectspinner/jquery.selectspinner.css" rel="stylesheet" type="text/css" />
+		<link  href="css/factorio.css" rel="stylesheet" type="text/css" />
 
-        <script src="lib/js.cookie.js"></script>
-        <script src="lib/jquery/jquery-1.12.2.js"></script>
-        <script src="lib/jquery.getparameter.js"></script>
-        <script src="lib/jqueryui/jquery-ui.js"></script>
-        <script src="lib/treetable/jquery.treetable.js"></script>
-        <script src="lib/select2/select2.js"></script>
-        <script src="lib/selectspinner/jquery.selectspinner.js"></script>
-        <script src="js/factorio.js"></script>
-        <script src="js/factorio-tree.js"></script>
-        <script src="js/factorio-helper.js"></script>
+		<script src="lib/js.cookie.js"></script>
+		<script src="lib/jquery/jquery-1.12.2.js"></script>
+		<script src="lib/jquery.getparameter.js"></script>
+		<script src="lib/jqueryui/jquery-ui.js"></script>
+		<script src="lib/treetable/jquery.treetable.js"></script>
+		<script src="lib/select2/select2.js"></script>
+		<script src="lib/selectspinner/jquery.selectspinner.js"></script>
+		<script src="lib/d3/d3.js" charset="utf-8"></script>
+		<script src="lib/d3-plugins/sankey/sankey.js"></script>
+		<script src="js/factorio.js"></script>
+		<script src="js/factorio-tree.js"></script>
+		<script src="js/factorio-helper.js"></script>
+		<script src="js/factorio-graph.js"></script>
 
-        <title>Factorio Tree</title>
-        <link rel="shortcut icon" href="icons/advanced-circuit.png" />
-        <style type="text/css">
-        </style>
-        <script>
-            $(function() {
-                var def = {
-                    recipes : "recipes/base/0.12.1/en.json"
-                };
-                var cookies = Cookies.getJSON('factorio');
-                var para = $.extend({}, def, cookies, $.getParameter());
-                var h = Factorio.helper;
-                console.log(para);
+		<title>Factorio Tree</title>
+		<link rel="shortcut icon" href="icons/advanced-circuit.png" />
+		<style type="text/css">
+		</style>
+		<script>
+			$(function() {
+				var def = {
+					recipes : "recipes/base/0.12.1/en.json"
+				};
+				var cookies = Cookies.getJSON('factorio');
+				var para = $.extend({}, def, cookies, $.getParameter());
+				var h = Factorio.helper;
+				console.log(para);
 
-                h.init($("#test"), para, function() {
-                });
-            });
-            $(function() {
-                //console.log(Object.keys(test));
-            });
-        </script>
-    </head>
-    <body>
-        <h1>Factorio Tree</h1>
-        <div id='test'>
-            Now loading...
-        </div>
-        <div>
-            <a href="index.html?recipes=recipes/base/0.12.1/en.json">English</a>
-            /
-            <a href="index.html?recipes=recipes/base/0.12.1/ja.json">Japanese</a>
-        </div>
-    </body>
+				h.init($("#test"), para, function() {
+				});
+			});
+			$(function() {
+			});
+		</script>
+	</head>
+	<body>
+		<h1>Factorio Tree</h1>
+		<div id='test'>
+			Now loading...
+		</div>
+		<div>
+			<a href="index.html?recipes=recipes/base/0.12.1/en.json">English</a>
+			/
+			<a href="index.html?recipes=recipes/base/0.12.1/ja.json">Japanese</a>
+		</div>
+	</body>
 </html>

@@ -39,6 +39,7 @@ Factorio.tree.prototype = {
             return node;
         }
         //h.table.treetable("loadBranch", node, rows);
+       	req_spd=req_spd/tgt.quantity;
         $.each(tgt.ingredients, function() {
             h.prenode(req_spd * this[1], this[0], node, depth + 1, ary, root_id);
         });
