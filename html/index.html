@@ -3,64 +3,46 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<script src="lib/jquery-1.12.2.js"></script>
+		<link  href="lib/jqueryui/jquery-ui.css" rel="stylesheet" type="text/css" />
+		<link  href="lib/treetable/jquery.treetable.css" rel="stylesheet" type="text/css" />
+		<link  href="lib/treetable/jquery.treetable.theme.default.css" rel="stylesheet" type="text/css" />
+		<link  href="lib/select2/select2.css" rel="stylesheet" type="text/css" />
+		<link  href="lib/selectspinner/jquery.selectspinner.css" rel="stylesheet" type="text/css" />
+		<link  href="css/factorio.css" rel="stylesheet" type="text/css" />
+
 		<script src="lib/js.cookie.js"></script>
-
-		<link rel="stylesheet" href="css/jquery-ui.css" />
-		<script src="lib/jquery-ui.js"></script>
-
+		<script src="lib/jquery/jquery-1.12.2.js"></script>
 		<script src="lib/jquery.getparameter.js"></script>
-
-		<link rel="stylesheet" href="css/jquery.treetable.css" type="text/css" />
-		<link rel="stylesheet" href="css/jquery.treetable.theme.default.css" type="text/css" />
-		<script src="lib/jquery.treetable.js"></script>
-
-		<link href="css/select2.min.css" rel="stylesheet" />
-		<script src="lib/select2.min.js"></script>
-
+		<script src="lib/jqueryui/jquery-ui.js"></script>
+		<script src="lib/treetable/jquery.treetable.js"></script>
+		<script src="lib/select2/select2.js"></script>
+		<script src="lib/selectspinner/jquery.selectspinner.js"></script>
+		<script src="lib/d3/d3.js" charset="utf-8"></script>
+		<script src="lib/d3-plugins/sankey/sankey.js"></script>
 		<script src="js/factorio.js"></script>
 		<script src="js/factorio-tree.js"></script>
 		<script src="js/factorio-helper.js"></script>
+		<script src="js/factorio-graph.js"></script>
 
 		<title>Factorio Tree</title>
 		<link rel="shortcut icon" href="icons/advanced-circuit.png" />
 		<style type="text/css">
-			.Factorio_tree .name-icon {
-				width: 32px;
-				height: 32px;
-			}
-			.Factorio_tree .select2-img-icon {
-				width: 32px;
-				height: 32px;
-				vertical-align: middle;
-			}
-			.Factorio_tree .select2-selection--single {
-				font-weight: normal;
-				height: 34px;
-			}
-			.Factorio_tree .select2-selection--single .select2-selection__arrow {
-				height: 30px;
-			}
-			.Factorio_tree .select2-container--default .select2-selection--multiple .select2-selection__choice {
-				margin-top: 0px;
-			}
 		</style>
 		<script>
-            $(function() {
-                var def = {
-                    recipes : "recipes/base/0.12.1/en.json"
-                };
-                var cookies=Cookies.getJSON('factorio');
-                var para = $.extend({},def,cookies, $.getParameter());
-                var h = Factorio.helper;
-                console.log(para);
+			$(function() {
+				var def = {
+					recipes : "recipes/base/0.12.1/en.json"
+				};
+				var cookies = Cookies.getJSON('factorio');
+				var para = $.extend({}, def, cookies, $.getParameter());
+				var h = Factorio.helper;
+				console.log(para);
 
-                h.init($("#test"), para, function() {
-                });
-            });
-            $(function() {
-                //console.log(Object.keys(test));
-            });
+				h.init($("#test"), para, function() {
+				});
+			});
+			$(function() {
+			});
 		</script>
 	</head>
 	<body>

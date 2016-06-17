@@ -5,7 +5,17 @@
   "product_name" : "Product Name",
   "require_product_speed" : "Require product speed[units/sec]",
   "production_facility" : "Production facility",
-  "product_ejector" : "Ejector"
+  "product_ejector" : "Ejector",
+  "target_item" : "target item:",
+  "facirities" : "facirities:",
+  "ejectors" : "ejectors:",
+  "merge_items" : "merge item(s):"
+},
+"tooltip" : {
+  "add" : "Add the recipe of the items on the table.",
+  "clear" : "To clear all the recipes on the table.",
+  "save" : "Saves the current options in the cookie. Restore at the time of reloading.",
+  "erase" : "Delete the options that are stored in a cookie."
 },
 "facilities" : {
   "crafting"   : {"list" : [["assembling_machine_1", "assembling_machine_2", "assembling_machine_3"],
@@ -45,7 +55,7 @@
     "name": "Coal",
     "query": "Coal",
     "quantity": 0.5715,
-    "time": 1.0,
+    "time": 0.5,
     "cargo": "solid",
     "category": "resource",
     "ingredients": [],
@@ -56,7 +66,7 @@
     "name": "Iron ore",
     "query": "Iron ore",
     "quantity": 0.5715,
-    "time": 1.0,
+    "time": 0.5,
     "cargo": "solid",
     "category": "resource",
     "ingredients": [],
@@ -67,7 +77,7 @@
     "name": "Copper ore",
     "query": "Copper ore",
     "quantity": 0.5715,
-    "time": 1.0,
+    "time": 0.5,
     "cargo": "solid",
     "category": "resource",
     "ingredients": [],
@@ -78,7 +88,7 @@
     "name": "Stone",
     "query": "Stone",
     "quantity": 0.5715,
-    "time": 1.0,
+    "time": 0.5,
     "cargo": "solid",
     "category": "resource",
     "ingredients": [],
@@ -1070,7 +1080,7 @@
     "category": "crafting",
     "ingredients": [["iron_gear_wheel", 3], ["stone_furnace", 1], ["iron_plate", 3]],
     "factory": ["crafting", 1],
-    "production_efficiency" : 1.0 
+    "production_efficiency" : 0.35
   },
   "electric_mining_drill": {
     "icon": "icons/electric-mining-drill.png" ,
@@ -1162,7 +1172,7 @@
     "category": "crafting",
     "ingredients": [["stone", 5]],
     "factory": ["crafting", 0],
-    "production_efficiency" : 0.5 
+    "production_efficiency" : 1.0
   },
   "steel_furnace": {
     "icon": "icons/steel-furnace.png" ,
@@ -1174,7 +1184,7 @@
     "category": "crafting",
     "ingredients": [["steel_plate", 8], ["stone_brick", 10]],
     "factory": ["crafting", 0],
-    "production_efficiency" : 1.0 
+    "production_efficiency" : 2.0 
   },
   "electric_furnace": {
     "icon": "icons/electric-furnace.png" ,
@@ -1186,7 +1196,7 @@
     "category": "crafting",
     "ingredients": [["steel_plate", 15], ["stone_brick", 10], ["advanced_circuit", 5]],
     "factory": ["crafting", 1],
-    "production_efficiency" : 1.0 
+    "production_efficiency" : 2.0 
   },
   "assembling_machine_1": {
     "icon": "icons/assembling-machine-1.png" ,
