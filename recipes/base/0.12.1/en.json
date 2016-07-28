@@ -300,7 +300,7 @@
     "time": 15.0,
     "cargo": "solid",
     "category": "crafting",
-    "ingredients": [["electronic_circuit", 20], ["advanced_circuit", 2], ["sulfuric_acid", 0]],
+    "ingredients": [["electronic_circuit", 20], ["advanced_circuit", 2], ["sulfuric_acid", 0.5]],
     "factory": ["crafting", 1]
   },
   "engine_unit": {
